@@ -3,11 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ): Promise<Response | undefined> {
-  // const { id: roomId } = params;
+  const { id: roomId } = await params;
 
-  const roomId = params.id;
   try {
     const roomReviews = await getRoomReviews(roomId);
 

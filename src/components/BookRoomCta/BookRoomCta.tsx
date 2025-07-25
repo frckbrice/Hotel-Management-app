@@ -95,7 +95,7 @@ const BookRoomCta = ({
             onChange={(date) => setCheckoutDate(date)}
             dateFormat="dd/MM/yyyy"
             disabled={!checkinDate}
-            minDate={calcMinCheckoutDate()}
+            minDate={calcMinCheckoutDate() ?? undefined}
             id="check-out-date"
             className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary"
           />

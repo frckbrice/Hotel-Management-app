@@ -1,6 +1,8 @@
-import { Stripe, loadStripe } from "@stripe/stripe-js";
+import { Stripe as Stripejs, loadStripe } from "@stripe/stripe-js";
+import Stripe from "stripe";
 
-let stripePromise: Promise<Stripe | null>;
+
+let stripePromise: Promise<Stripejs | null>;
 
 export const getStripe = () => {
   if (!stripePromise) {
@@ -10,3 +12,7 @@ export const getStripe = () => {
   }
   return stripePromise;
 };
+
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+  apiVersion: "2025-06-30.basil",
+});
