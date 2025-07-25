@@ -5,7 +5,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>WELCOME TO HOTELAV</title>
+        <title>WELCOME TO HOTEL-AV</title>
       </Head>
       <h1>HOTEL MANAGEMENT APP!</h1>
 

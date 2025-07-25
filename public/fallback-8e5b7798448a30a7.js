@@ -1,1 +1,0 @@
-self.fallback=async e=>{let{destination:n,url:a}=e,c={document:!1,image:"/public/assets/icons/icon-512x512.png",audio:!1,video:!1,font:!1}[n];return c?caches.match(c,{ignoreSearch:!0}):Response.error()};

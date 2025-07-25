@@ -3,10 +3,7 @@ import { getRoom } from "@/libs/apis";
 import { authOptions } from "@/libs/auth";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2023-10-16",
-});
+import { stripe } from "@/libs/stripe";
 
 type RequestData = {
   checkinDate: string;
@@ -17,7 +14,7 @@ type RequestData = {
   hotelRoomSlug: string;
 };
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const {
     checkinDate,
     checkoutDate,

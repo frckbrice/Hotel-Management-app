@@ -9,9 +9,7 @@ import { authOptions } from "@/libs/auth";
 
 import { NextResponse } from "next/server";
 
-console.log("entring api ");
-
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
   //*get logged in user credentials from session
   const session = await getServerSession(authOptions);
 
@@ -37,7 +35,7 @@ export async function GET(req: Request, res: Response) {
   }
 }
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
 
   if (!session)

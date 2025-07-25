@@ -3,7 +3,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { signUp } from "next-auth-sanity/client";
 import { signIn, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -49,11 +48,20 @@ const Auth = (props: Props) => {
     event.preventDefault();
     try {
       console.log(formData);
-      const user = await signUp(formData);
-      if (user) toast.success("Success. Please login");
+      const res = await fetch("/api/sanity/signUp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        toast.success("Success. Please login");
+      } else {
+        toast.error(data.error || "Something went wrong");
+      }
     } catch (error) {
       console.log(error);
-      toast.error("something when wrong");
+      toast.error("Something went wrong");
     } finally {
       setFormData(defaultFormData);
     }
