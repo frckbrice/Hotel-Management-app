@@ -15,7 +15,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   scope: "/app",
   sw: "service-worker.js",
   fallbacks: {
-    image: "/public/assets/icons/icon-512x512.png",
+    image: "/assets/icons/icon-512x512.png",
   },
 });
 
