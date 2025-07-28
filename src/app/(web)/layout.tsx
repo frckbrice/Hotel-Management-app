@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Hotel booking App",
   description: "Come and discover the most luxury hotel the country Cameroon",
   manifest: "/manifest.json",
-  icons: { apple: "/public/assets/icons/icon-512x512.png" },
+  icons: { apple: "/assets/icons/icon-512x512.png" },
   formatDetection: {
     telephone: false,
   },
