@@ -6,6 +6,19 @@ const sanityClient = createClient({
   useCdn: process.env.NODE_ENV === "production",
   token: process.env.SANITY_STUDIO_TOKEN,
   apiVersion: "2021-10-21",
+  perspective: "published",
+  stega: false,
+});
+
+// Create a separate client for authentication (no CDN, with token)
+export const authSanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  useCdn: false, // Always false for auth operations
+  token: process.env.SANITY_STUDIO_TOKEN,
+  apiVersion: "2021-10-21",
+  perspective: "published",
+  stega: false,
 });
 
 export default sanityClient;

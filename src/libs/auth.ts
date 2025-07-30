@@ -1,10 +1,11 @@
 import { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import sanityClient from "./sanity";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { authSanityClient } from "./sanity";
 import { nanoid } from "nanoid";
 import { AdapterUser, VerificationToken } from "next-auth/adapters";
-// import bcrypt from "bcryptjs"; // Not used in this adapter
+import bcrypt from "bcryptjs";
 
 // Types for adapter methods
 interface AdapterAccount {
@@ -139,28 +140,132 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    // Credentials provider can be added here if needed
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          console.log("Missing credentials");
+          return null;
+        }
+
+        try {
+          console.log("Attempting to authenticate:", credentials.email);
+          const user = await authSanityClient.fetch(
+            "*[_type == 'user' && email == $email][0]",
+            { email: credentials.email }
+          );
+
+          console.log("User found:", user ? "Yes" : "No");
+
+          if (!user || !user.password) {
+            console.log("User not found or no password");
+            return null;
+          }
+
+          const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+          console.log("Password valid:", isPasswordValid);
+
+          if (!isPasswordValid) {
+            return null;
+          }
+
+          return {
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            image: user.image,
+          };
+        } catch (error) {
+          console.error("Auth error:", error);
+          return null;
+        }
+      }
+    }),
   ],
+  pages: {
+    signIn: '/auth',
+    error: '/auth',
+  },
   session: {
     strategy: "jwt",
   },
-  adapter: SanityAdapter(sanityClient),
   debug: process.env.NODE_ENV === "development",
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
+    async signIn({ user, account, profile }) {
+      console.log("SignIn callback:", { user, account, profile });
+      return true;
+    },
+    async jwt({ token, user, account }) {
+      console.log("JWT callback:", { token, user, account });
+      if (user) {
+        // Normalize user ID - remove 'user.' prefix if present (Google OAuth issue)
+        let normalizedUserId = user.id;
+        if (normalizedUserId && (normalizedUserId as string).startsWith('user.')) {
+          normalizedUserId = (normalizedUserId as string).substring(5);
+          console.log("JWT: Normalized user ID (removed 'user.' prefix):", normalizedUserId);
+        }
+        token.id = normalizedUserId;
+      }
+      return token;
+    },
     session: async ({ session, token }) => {
-      const userEmail = token.email;
-      const userIdObject = await sanityClient.fetch<{ _id: string }>(
-        `*[_type=="user" && email == $email][0] { _id } `,
-        { email: userEmail }
-      );
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: userIdObject?._id,
-        },
-      };
+      console.log("Session callback:", { session, token });
+      try {
+        const userEmail = token.email;
+        if (!userEmail) {
+          console.log("No email in token");
+          return {
+            ...session,
+            user: {
+              ...session.user,
+              id: token.id,
+            },
+          };
+        }
+
+        const userIdObject = await authSanityClient.fetch<{ _id: string }>(
+          `*[_type=="user" && email == $email][0] { _id } `,
+          { email: userEmail }
+        );
+
+        console.log("User ID object:", userIdObject);
+
+        // Normalize user ID - remove 'user.' prefix if present (Google OAuth issue)
+        let normalizedUserId = userIdObject?._id || token.id;
+        if (normalizedUserId && (normalizedUserId as string).startsWith('user.')) {
+          normalizedUserId = (normalizedUserId as string).substring(5);
+          console.log("Normalized user ID (removed 'user.' prefix):", normalizedUserId);
+        }
+
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: normalizedUserId,
+          },
+        };
+      } catch (error) {
+        console.error("Session callback error:", error);
+        // Fallback: normalize the token ID as well
+        let fallbackUserId = token.id;
+        if (fallbackUserId && (fallbackUserId as string).startsWith('user.')) {
+          fallbackUserId = (fallbackUserId as string).substring(5);
+          console.log("Fallback normalized user ID:", fallbackUserId);
+        }
+
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: fallbackUserId,
+          },
+        };
+      }
     },
   },
 };
