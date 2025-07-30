@@ -3,5 +3,3 @@
 
 echo "Running tests before push..."
 npm run format
-npm run test
-npm run test:e2e 

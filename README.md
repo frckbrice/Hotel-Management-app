@@ -1,8 +1,10 @@
 # 🏨 HotelMT - Full-Stack Hotel Management Platform
 
-A production-ready hotel booking system showcasing modern web development practices, comprehensive testing, and enterprise-grade deployment workflows.
+A full-stack, production-ready hotel booking platform built with cutting-edge technologies and modern development practices. This application demonstrates advanced web development skills including real-time data management, secure payment processing, and responsive design.
 
-**[Live Demo](https://hotel-mgt.vercel.app)** | **[Portfolio](https://maebrieporfolio.vercel.app)**
+![HotelMT Dashboard](public/hotelmgt/hmgt_3.png)
+
+![HotelMT Dashboard](public/hotelmgt/hmgt_1.png)
 
 ## 🎯 Key Achievements
 
@@ -171,7 +173,3 @@ yarn test:coverage # Coverage report
 - **GitHub**: [@frckbrice](https://github.com/frckbrice)
 - **LinkedIn**: [avom evariste](https://www.linkedin.com/in/avom-brice/)
 - **Portfolio**: [maebrieporfolio.vercel.app](https://maebrieporfolio.vercel.app)
-
----
-
-⭐ **This project demonstrates enterprise-level development practices, comprehensive testing strategies, and production-ready deployment workflows - perfect for showcasing advanced full-stack development skills.**

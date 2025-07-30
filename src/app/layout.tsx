@@ -6,6 +6,8 @@ import ThemeProvider from '@/app/themeProvider/ThemeProvider';
 import { Toaster } from 'react-hot-toast';
 import PerformanceMonitor from '@/components/PerformanceMonitor/PerformanceMonitor';
 import { AccessibilityProvider } from '@/components/Accessibility/AccessibilityProvider';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -50,10 +52,18 @@ export const metadata: Metadata = {
       'Experience luxury and comfort at HotelMT. Book your perfect stay with world-class amenities, exceptional service, and unforgettable experiences in Cameroon.',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/seo/og-image-1200x630.jpg',
         width: 1200,
         height: 630,
-        alt: 'HotelMT - Luxury Hotel Experience',
+        alt: 'HotelMT - Luxury Hotel Experience in Cameroon',
+        type: 'image/jpeg',
+      },
+      {
+        url: '/images/seo/og-image-800x420.jpg',
+        width: 800,
+        height: 420,
+        alt: 'HotelMT - Luxury Hotel Experience in Cameroon',
+        type: 'image/jpeg',
       },
     ],
   },
@@ -62,7 +72,14 @@ export const metadata: Metadata = {
     title: 'HotelMT - Luxury Hotel Booking & Management',
     description:
       'Experience luxury and comfort at HotelMT. Book your perfect stay with world-class amenities, exceptional service, and unforgettable experiences in Cameroon.',
-    images: ['/og-image.jpg'],
+    images: [
+      {
+        url: '/images/seo/twitter-image-1200x600.jpg',
+        width: 1200,
+        height: 600,
+        alt: 'HotelMT - Luxury Hotel Experience in Cameroon',
+      },
+    ],
     creator: '@hotelmt',
     site: '@hotelmt',
   },
@@ -81,6 +98,26 @@ export const metadata: Metadata = {
     google: 'your-google-verification-code',
     yandex: 'your-yandex-verification-code',
     yahoo: 'your-yahoo-verification-code',
+  },
+  other: {
+    'geo.region': 'CM',
+    'geo.placename': 'Cameroon',
+    'geo.position': '3.848033;-11.502075',
+    ICBM: '3.848033, -11.502075',
+    'DC.title': 'HotelMT - Luxury Hotel Booking & Management',
+    'DC.creator': 'HotelMT Team',
+    'DC.subject': 'Luxury Hotel, Hotel Booking, Cameroon Hotels',
+    'DC.description':
+      'Experience luxury and comfort at HotelMT. Book your perfect stay with world-class amenities, exceptional service, and unforgettable experiences in Cameroon.',
+    'DC.publisher': 'HotelMT',
+    'DC.contributor': 'HotelMT Team',
+    'DC.date': '2025-01-01',
+    'DC.type': 'Service',
+    'DC.format': 'text/html',
+    'DC.identifier': 'https://hotel-mgt.vercel.app',
+    'DC.language': 'en',
+    'DC.coverage': 'Cameroon',
+    'DC.rights': 'Copyright 2025 HotelMT',
   },
 };
 
@@ -127,6 +164,77 @@ export default function RootLayout({
         <meta name='msapplication-config' content='/browserconfig.xml' />
         <meta name='msapplication-TileColor' content='#000000' />
         <meta name='theme-color' content='#000000' />
+        <meta name='msapplication-TileColor' content='#000000' />
+        <meta name='apple-mobile-web-app-capable' content='yes' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='default' />
+        <meta name='apple-mobile-web-app-title' content='HotelMT' />
+        <meta name='format-detection' content='telephone=no' />
+        <meta name='mobile-web-app-capable' content='yes' />
+
+        {/* SEO Meta Tags */}
+        <meta name='author' content='HotelMT Team' />
+        <meta name='copyright' content='Copyright 2025 HotelMT' />
+        <meta name='language' content='en' />
+        <meta name='coverage' content='Cameroon' />
+        <meta name='distribution' content='global' />
+        <meta name='rating' content='general' />
+        <meta name='revisit-after' content='7 days' />
+        <meta
+          name='robots'
+          content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+        />
+        <meta
+          name='googlebot'
+          content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+        />
+
+        {/* Open Graph Meta Tags */}
+        <meta property='og:type' content='website' />
+        <meta
+          property='og:title'
+          content='HotelMT - Luxury Hotel Booking & Management'
+        />
+        <meta
+          property='og:description'
+          content='Experience luxury and comfort at HotelMT. Book your perfect stay with world-class amenities, exceptional service, and unforgettable experiences in Cameroon.'
+        />
+        <meta property='og:url' content='https://hotel-mgt.vercel.app' />
+        <meta property='og:site_name' content='HotelMT' />
+        <meta property='og:locale' content='en_US' />
+        <meta
+          property='og:image'
+          content='https://hotel-mgt.vercel.app/images/seo/og-image-1200x630.jpg'
+        />
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='630' />
+        <meta
+          property='og:image:alt'
+          content='HotelMT - Luxury Hotel Experience in Cameroon'
+        />
+        <meta property='og:image:type' content='image/jpeg' />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:site' content='@hotelmt' />
+        <meta name='twitter:creator' content='@hotelmt' />
+        <meta
+          name='twitter:title'
+          content='HotelMT - Luxury Hotel Booking & Management'
+        />
+        <meta
+          name='twitter:description'
+          content='Experience luxury and comfort at HotelMT. Book your perfect stay with world-class amenities, exceptional service, and unforgettable experiences in Cameroon.'
+        />
+        <meta
+          name='twitter:image'
+          content='https://hotel-mgt.vercel.app/images/seo/twitter-image-1200x600.jpg'
+        />
+        <meta
+          name='twitter:image:alt'
+          content='HotelMT - Luxury Hotel Experience in Cameroon'
+        />
+
+        {/* Favicon and Icons */}
         <link rel='apple-touch-icon' href='/icons/apple-touch-icon.png' />
         <link
           rel='icon'
@@ -256,9 +364,11 @@ export default function RootLayout({
             <ThemeProvider>
               <AccessibilityProvider>
                 <div className='min-h-screen flex flex-col'>
+                  <Header />
                   <main className='flex-1' role='main'>
                     {children}
                   </main>
+                  <Footer />
                 </div>
                 <Toaster position='top-left' reverseOrder={false} />
                 <PerformanceMonitor />
