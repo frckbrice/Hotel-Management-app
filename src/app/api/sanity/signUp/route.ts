@@ -1,6 +1,17 @@
-import { authSanityClient } from '@/libs/sanity';
+import { createClient } from 'next-sanity';
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
+
+// Create a direct Sanity client for signup (no session authentication)
+const signupSanityClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  useCdn: false,
+  token: process.env.SANITY_WRITE_TOKEN || process.env.SANITY_STUDIO_TOKEN,
+  apiVersion: '2021-10-21',
+  perspective: 'published',
+  stega: false,
+});
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,7 +48,7 @@ export async function POST(req: NextRequest) {
 
     // Check if user already exists
     console.log('Checking for existing user...');
-    const existingUser = await authSanityClient.fetch(
+    const existingUser = await signupSanityClient.fetch(
       "*[_type == 'user' && email == $email][0]",
       { email }
     );
@@ -65,7 +76,7 @@ export async function POST(req: NextRequest) {
       isAdmin: false,
     };
 
-    const createdUser = await authSanityClient.create(newUser);
+    const createdUser = await signupSanityClient.create(newUser);
     console.log('User created successfully:', createdUser._id);
 
     return NextResponse.json({ success: true, userId: createdUser._id });

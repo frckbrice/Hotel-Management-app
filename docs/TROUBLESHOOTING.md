@@ -6,6 +6,41 @@ This document tracks all problems encountered during development, their solution
 
 ### 1. Authentication System Issues
 
+#### **Problem**: Signup API Returning HTML Instead of JSON
+
+- **Issue**: `"Something went wrong error on signup. Unexpected token '<', "<!DOCTYPE "... is not valid JSON"`
+- **Root Cause**: Middleware was protecting the signup API route, causing it to redirect to signin page
+- **Solution**:
+  ```typescript
+  // Updated middleware to exclude signup route
+  export const config = {
+    matcher: [
+      '/users/:path*',
+      '/api/((?!sanity/signUp|test-env|contact|stripe|webhook).*)',
+    ],
+  };
+  ```
+- **Files Modified**: `src/middleware.ts`
+
+#### **Problem**: Sanity Client Session Authentication Error
+
+- **Issue**: `"Unauthorized - Session not found"` during signup
+- **Root Cause**: `authSanityClient` was trying to use session-based authentication
+- **Solution**:
+  ```typescript
+  // Created direct Sanity client in signup route
+  const signupSanityClient = createClient({
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    useCdn: false,
+    token: process.env.SANITY_WRITE_TOKEN || process.env.SANITY_STUDIO_TOKEN,
+    apiVersion: '2021-10-21',
+    perspective: 'published',
+    stega: false,
+  });
+  ```
+- **Files Modified**: `src/app/api/sanity/signUp/route.ts`
+
 #### **Problem**: OAuth User ID Inconsistency
 
 - **Issue**: Google OAuth user IDs had `user.` prefix while GitHub IDs did not

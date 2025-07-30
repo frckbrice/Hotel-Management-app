@@ -7,7 +7,7 @@ import axios from 'axios';
 import { User } from '@/components/models/user';
 import { Booking } from '@/components/models/booking';
 import Image from 'next/image';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaRegUserCircle, FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import { signOut, useSession } from 'next-auth/react';
 import { useState, useEffect, useRef } from 'react';
 import { BsJournalBookmarkFill } from 'react-icons/bs';
@@ -154,24 +154,38 @@ const UserDetails = ({ userId }: Props) => {
           <div className='hidden md:block col-span-4 lg:col-span-3 sticky top-10 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 space-y-6'>
             {/* Profile Image */}
             <div className='w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-green-300 dark:border-green-600 shadow-lg'>
-              <Image
-                src={userData?.image || user?.image || ''}
-                alt={userData?.name || user?.name || 'User image'}
-                width={128}
-                height={128}
-                className='w-full h-full object-cover'
-              />
+              {userData?.image || user?.image ? (
+                <div className='w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-green-300 dark:border-green-600 shadow-lg'>
+                  <Image
+                    src={userData?.image || user?.image || ''}
+                    alt={userData?.name || user?.name || 'User image'}
+                    width={128}
+                    height={128}
+                    className='w-full h-full object-cover'
+                  />
+                </div>
+              ) : (
+                <div
+                  className='w-32 h-32 rounded-full flex items-center justify-center'
+                  style={{
+                    background:
+                      'linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)))',
+                  }}
+                >
+                  <FaUserCircle className='text-white' size={84} />
+                </div>
+              )}
             </div>
 
             {/* About Section */}
-            <div className='text-center'>
+            {/* <div className='text-center flex flex-col items-center justify-center'>
               <h2 className='text-2xl font-semibold text-gray-800 dark:text-white'>
                 About
               </h2>
               <p className='text-sm text-gray-600 dark:text-gray-300 mt-2 text-justify'>
                 {userData?.about || user?.name || 'No description available'}
               </p>
-            </div>
+            </div> */}
 
             {/* Username / Name */}
             <div className='text-center'>
