@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import './(web)/globals.css';
+import './globals.css';
 import { NextAuthProvider } from '@/components/AuthProvider/authProvider';
-import ThemeProvider from '@/app/(web)/themeProvider/ThemeProvider';
+import ThemeProvider from '@/app/themeProvider/ThemeProvider';
 import { Toaster } from 'react-hot-toast';
 import PerformanceMonitor from '@/components/PerformanceMonitor/PerformanceMonitor';
 import { AccessibilityProvider } from '@/components/Accessibility/AccessibilityProvider';
