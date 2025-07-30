@@ -1,5 +1,5 @@
-import { timeStamp } from "console";
-import React, { FC, useEffect, useState } from "react";
+import { timeStamp } from 'console';
+import React, { FC, useEffect, useState } from 'react';
 
 type Props = {
   endValue: number;
@@ -29,7 +29,7 @@ const CountUpNumber: FC<Props> = ({ endValue, durations }) => {
   }, [endValue, durations]);
 
   return (
-    <p className="md:font-bold font-medium text-lg xl:text-5xl">
+    <p className='md:font-bold font-medium text-lg xl:text-5xl'>
       {Math.round(count)}
     </p>
   );

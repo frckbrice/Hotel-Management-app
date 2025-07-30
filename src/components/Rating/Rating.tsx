@@ -1,5 +1,5 @@
-import React from "react";
-import { FaStar, FaStarHalf } from "react-icons/fa";
+import React from 'react';
+import { FaStar, FaStarHalf } from 'react-icons/fa';
 
 type Props = {
   rating: number;

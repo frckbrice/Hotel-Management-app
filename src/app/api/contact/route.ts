@@ -1,33 +1,34 @@
-import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { NextRequest, NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 export async function POST(req: NextRequest) {
-    try {
-        const { firstName, lastName, email, phone, subject, message } = await req.json();
+  try {
+    const { firstName, lastName, email, phone, subject, message } =
+      await req.json();
 
-        // Validate required fields
-        if (!firstName || !lastName || !email || !subject || !message) {
-            return NextResponse.json(
-                { error: "Missing required fields" },
-                { status: 400 }
-            );
-        }
+    // Validate required fields
+    if (!firstName || !lastName || !email || !subject || !message) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
 
-        // Create transporter
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            },
-        });
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-        // Email content
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: process.env.CONTACT_EMAIL || process.env.EMAIL_USER,
-            subject: `Contact Form: ${subject} - ${firstName} ${lastName}`,
-            html: `
+    // Email content
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.CONTACT_EMAIL || process.env.EMAIL_USER,
+      subject: `Contact Form: ${subject} - ${firstName} ${lastName}`,
+      html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #16a34a; border-bottom: 2px solid #16a34a; padding-bottom: 10px;">
             New Contact Form Submission
@@ -53,20 +54,20 @@ export async function POST(req: NextRequest) {
           </div>
         </div>
       `,
-        };
+    };
 
-        // Send email
-        await transporter.sendMail(mailOptions);
+    // Send email
+    await transporter.sendMail(mailOptions);
 
-        return NextResponse.json(
-            { success: true, message: "Email sent successfully" },
-            { status: 200 }
-        );
-    } catch (error) {
-        console.error("Email sending error:", error);
-        return NextResponse.json(
-            { error: "Failed to send email" },
-            { status: 500 }
-        );
-    }
-} 
+    return NextResponse.json(
+      { success: true, message: 'Email sent successfully' },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Email sending error:', error);
+    return NextResponse.json(
+      { error: 'Failed to send email' },
+      { status: 500 }
+    );
+  }
+}

@@ -49,19 +49,21 @@ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
 ## Features Added
 
 ### Contact Form
-- ✅ Real email sending via Nodemailer
-- ✅ Form validation
-- ✅ Loading states
-- ✅ Success/error messages
-- ✅ Responsive design
-- ✅ Theme-aware styling
+
+- Real email sending via Nodemailer
+- Form validation
+- Loading states
+- Success/error messages
+- Responsive design
+- Theme-aware styling
 
 ### Google Maps
-- ✅ Interactive map centered on Yaoundé, Cameroon
-- ✅ Custom hotel marker
-- ✅ Info window on marker click
-- ✅ Responsive design
-- ✅ Theme-aware styling
+
+- Interactive map centered on Yaoundé, Cameroon
+- Custom hotel marker
+- Info window on marker click
+- Responsive design
+- Theme-aware styling
 
 ## Usage
 
@@ -73,11 +75,13 @@ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY="your-google-maps-api-key"
 ## Troubleshooting
 
 ### Email Issues
+
 - Ensure Gmail app password is correct
 - Check if 2FA is enabled
 - Verify `EMAIL_USER` is correct
 
 ### Maps Issues
+
 - Ensure Google Maps API key is valid
 - Check if Maps JavaScript API is enabled
-- Verify API key restrictions allow your domain 
+- Verify API key restrictions allow your domain

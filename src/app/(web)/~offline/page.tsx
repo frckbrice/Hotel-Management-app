@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Image from "next/image";
+import Head from 'next/head';
+import Image from 'next/image';
 
 export default function Index() {
   return (
@@ -10,8 +10,8 @@ export default function Index() {
       <h1>HOTEL MANAGEMENT APP!</h1>
 
       <Image
-        src="/assets/icons/icon-512x512.png"
-        alt="random cat"
+        src='/assets/icons/icon-512x512.png'
+        alt='random cat'
         width={600}
         height={400}
       />

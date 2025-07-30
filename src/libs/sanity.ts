@@ -1,12 +1,12 @@
-import { createClient } from "next-sanity";
+import { createClient } from 'next-sanity';
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  useCdn: process.env.NODE_ENV === "production",
+  useCdn: process.env.NODE_ENV === 'production',
   token: process.env.SANITY_STUDIO_TOKEN,
-  apiVersion: "2021-10-21",
-  perspective: "published",
+  apiVersion: '2021-10-21',
+  perspective: 'published',
   stega: false,
 });
 
@@ -16,8 +16,8 @@ export const authSanityClient = createClient({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   useCdn: false, // Always false for auth operations
   token: process.env.SANITY_STUDIO_TOKEN,
-  apiVersion: "2021-10-21",
-  perspective: "published",
+  apiVersion: '2021-10-21',
+  perspective: 'published',
   stega: false,
 });
 

@@ -1,0 +1,194 @@
+# Page snapshot
+
+```yaml
+- alert
+- main:
+  - link "HotelMT":
+    - /url: /
+  - navigation:
+    - link "Home":
+      - /url: /
+    - link "Rooms":
+      - /url: /rooms
+    - link "Gallery":
+      - /url: /gallery
+    - link "Contact":
+      - /url: /contact
+  - link "Sign In":
+    - /url: /auth
+    - img
+    - text: Sign In
+  - button:
+    - img
+  - heading "Explore Our Exquisite Hotel" [level=1]
+  - paragraph: Experience an Exquisite Hotel Immersed in Rich History and Timeless Elegance.
+  - button "Get Started"
+  - paragraph: Basic Room
+  - paragraph: "32"
+  - paragraph: Luxury Room
+  - paragraph: "3"
+  - paragraph: Suite
+  - paragraph: "8"
+  - img "vecteezy_garden-in-hotel-"
+  - img "mateo-fernandez"
+  - img "linus-mimietz"
+  - text: Room Type
+  - combobox:
+    - option "All" [selected]
+    - option "Basic"
+    - option "Luxury"
+    - option "Suite"
+  - text: Search
+  - searchbox "Search"
+  - button "Search"
+  - img "Family Suite"
+  - img "8806332f6d11"
+  - img "04b17c9a14ef"
+  - heading "Featured Room" [level=3]
+  - paragraph: A spacious suite suitable for families with children. this comfortable and well-appointed suited offers ample space for families to relax and enjoy their stay. it's the perfect choice for memorable family vacation.
+  - paragraph: Start From
+  - paragraph: $ 500
+  - paragraph: Discount
+  - paragraph: $ 4
+  - link "More Details":
+    - /url: /rooms/family-suite
+  - heading "View our gallery" [level=2]
+  - img "Portrait by Alen"
+  - img
+  - img "Portrait by Alexander"
+  - img
+  - img "Portrait by Jacques Bopp"
+  - img
+  - img "Portrait by Roberto"
+  - img
+  - button "View Full Gallery":
+    - text: View Full Gallery
+    - img
+  - article: Testimonials
+  - heading "Guest Experiences" [level=2]
+  - paragraph: Hear what our valued guests have to say about their stays with us.
+  - img
+  - text: Alice New York
+  - paragraph: Our stay at the hotel was absolutely perfect! The attention to detail in the room design and the exceptional service made our vacation unforgettable. We can't wait to come back!
+  - img
+  - text: Bob London
+  - paragraph: I've traveled extensively, but the level of comfort at this hotel is unmatched. The bed was like sleeping on a cloud, and the staff went above and beyond to make our stay special.
+  - img
+  - text: Charlie Tokyo
+  - paragraph: The hotel's central location was ideal for exploring the city, but what really stood out was the rooftop bar with breathtaking views. The perfect blend of luxury and convenience!
+  - img
+  - text: David Sydney
+  - paragraph: From the moment we arrived, we were treated like royalty. The concierge gave us fantastic local dining recommendations that we would have never discovered on our own.
+  - img
+  - text: Ella Paris
+  - paragraph: The spa services were divine - exactly what we needed after a long flight. The therapists were true professionals, and the relaxation lounge became our favorite retreat.
+  - img
+  - text: Frank Toronto
+  - paragraph: As a business traveler, I appreciate the seamless check-in process and excellent work facilities. The soundproof rooms ensured I could work and rest without disturbances.
+  - paragraph: Explore More About Our Hotel
+  - heading "Sign Up for Our Newsletter" [level=6]
+  - textbox "Your email"
+  - button "Subscribe"
+  - link "HotelMT":
+    - /url: /
+  - paragraph: Experience luxury and comfort at its finest. Your perfect getaway awaits with world-class amenities and exceptional service.
+  - img
+  - heading "Contact" [level=4]
+  - img
+  - paragraph: Address
+  - paragraph: 123 Road, Avom
+  - img
+  - paragraph: Phone
+  - paragraph: 674-852-304
+  - img
+  - paragraph: Portfolio
+  - link "Check my work":
+    - /url: https://maebrieporfolio.vercel.app/
+    - text: Check my work
+    - img
+  - heading "Company" [level=4]:
+    - img
+    - text: Company
+  - list:
+    - listitem:
+      - link "Our story":
+        - /url: /about
+        - text: Our story
+        - img
+    - listitem:
+      - link "Get in touch":
+        - /url: /contact
+        - text: Get in touch
+        - img
+    - listitem:
+      - link "Our privacy commitment":
+        - /url: /privacy
+        - text: Our privacy commitment
+        - img
+    - listitem:
+      - link "Terms of service":
+        - /url: /terms
+        - text: Terms of service
+        - img
+    - listitem:
+      - link "Customer Assistance":
+        - /url: /support
+        - text: Customer Assistance
+        - img
+  - heading "Services" [level=4]:
+    - img
+    - text: Services
+  - list:
+    - listitem:
+      - link "Dining Experience":
+        - /url: /dining
+        - img
+        - text: Dining Experience
+    - listitem:
+      - link "Wellness":
+        - /url: /wellness
+        - img
+        - text: Wellness
+    - listitem:
+      - link "Fitness":
+        - /url: /fitness
+        - img
+        - text: Fitness
+    - listitem:
+      - link "Swimming Pool":
+        - /url: /pool
+        - img
+        - text: Swimming Pool
+    - listitem:
+      - link "Events":
+        - /url: /events
+        - img
+        - text: Events
+  - heading "Stay Connected" [level=4]
+  - paragraph: Subscribe to our newsletter for exclusive offers and updates.
+  - textbox "Enter your email"
+  - button:
+    - img
+  - paragraph: Follow us on social media
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - text: © 2025 HotelMT. All rights reserved. • Made with
+  - img
+  - text: in Cameroon
+  - link "Privacy Policy":
+    - /url: /privacy
+  - link "Terms":
+    - /url: /terms
+  - link "Cookies":
+    - /url: /cookies
+```

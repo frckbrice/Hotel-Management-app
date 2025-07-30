@@ -1,5 +1,5 @@
-import { Stripe as Stripejs, loadStripe } from "@stripe/stripe-js";
-import Stripe from "stripe";
+import { Stripe as Stripejs, loadStripe } from '@stripe/stripe-js';
+import Stripe from 'stripe';
 
 // Client-side Stripe (for frontend)
 let stripePromise: Promise<Stripejs | null>;
@@ -16,10 +16,10 @@ export const getStripe = () => {
 // Server-side Stripe (for API routes only)
 export const getServerStripe = () => {
   if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error("STRIPE_SECRET_KEY is not set");
+    throw new Error('STRIPE_SECRET_KEY is not set');
   }
 
   return new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2025-06-30.basil",
+    apiVersion: '2025-06-30.basil',
   });
 };

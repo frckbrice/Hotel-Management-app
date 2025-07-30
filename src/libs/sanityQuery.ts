@@ -1,4 +1,4 @@
-import { groq } from "next-sanity";
+import { groq } from 'next-sanity';
 
 export const getFeaturedRoomQuery = groq`*[_type == "hotelRoom" && isFeatured == true][0]{
   _id,
@@ -12,7 +12,7 @@ export const getFeaturedRoomQuery = groq`*[_type == "hotelRoom" && isFeatured ==
   coverImage
 }`;
 
-// groq has no special use than just help the editor know that this is a groq query. 
+// groq has no special use than just help the editor know that this is a groq query.
 // also help for auto completion.
 
 export const getRoomsQuery = groq`*[_type == "hotelRoom"]{
