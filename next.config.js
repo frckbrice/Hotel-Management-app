@@ -21,6 +21,7 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const nextConfig = {
   output: 'standalone',
+  removeConsole: process.env.NODE_ENV === 'production',
   images: {
     remotePatterns: [
       {

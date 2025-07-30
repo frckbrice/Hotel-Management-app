@@ -107,7 +107,7 @@ This document tracks all problems encountered during development, their solution
 - **Root Cause**: Incomplete test infrastructure
 - **Solution**:
   ```bash
-  yarn add -D @vitejs/plugin-react @testing-library/jest-dom @testing-library/react @testing-library/user-event jsdom
+  yarn add -D @vitejs/plugin-react @testing-library/jest-dom @testing-library/react @testing-library/user-event jsdom @testing-library/jdom
   ```
 
 ### 4. Docker & Deployment Issues

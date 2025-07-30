@@ -13,13 +13,8 @@ const Home = async () => {
     <div className='min-h-screen bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800 py-10'>
       <HeroSection />
       <PageSearch />
-      <div className='my-10'>
-        <FeaturedRoom featuredRoom={featuredRoom} />
-      </div>
-
-      <div className='my-10'>
-        <Gallery />
-      </div>
+      <FeaturedRoom featuredRoom={featuredRoom} />
+      <Gallery />
       <Testimonial />
       <NewsLetter />
     </div>

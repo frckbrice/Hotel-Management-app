@@ -23,9 +23,8 @@ const SingleRoom: FC<Props> = ({ room }) => {
         alt={room.name}
         width={300}
         height={300}
-        layout='fill'
         objectFit='cover'
-        className='transform group-hover:scale-110 transition-transform duration-300'
+        className='transform group-hover:scale-110 transition-transform duration-300 w-full h-full'
       />
       <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
         <h3 className='text-white text-lg font-bold'>{room.name}</h3>

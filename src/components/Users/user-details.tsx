@@ -287,7 +287,7 @@ const UserDetails = ({ userId }: Props) => {
             )}
 
             {/* Debug Section - Development Only */}
-            {process.env.NODE_ENV === 'development' && (
+            {/* {process.env.NODE_ENV === 'development' && (
               <div className='mt-8 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg'>
                 <h3 className='text-lg font-semibold text-yellow-800 dark:text-yellow-200 mb-4'>
                   Debug Info
@@ -574,7 +574,7 @@ const UserDetails = ({ userId }: Props) => {
                   </button>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <RatingModal

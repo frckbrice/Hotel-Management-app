@@ -5,6 +5,24 @@ import bcrypt from 'bcryptjs';
 export async function POST(req: NextRequest) {
   try {
     console.log('Signup request received');
+
+    // Check if required environment variables are set
+    if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+      console.error('Missing SANITY_PROJECT_ID');
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
+    if (!process.env.SANITY_WRITE_TOKEN && !process.env.SANITY_STUDIO_TOKEN) {
+      console.error('Missing Sanity token');
+      return NextResponse.json(
+        { error: 'Server configuration error' },
+        { status: 500 }
+      );
+    }
+
     const { email, password, name } = await req.json();
 
     console.log('Signup data:', { email, name, hasPassword: !!password });
@@ -53,6 +71,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, userId: createdUser._id });
   } catch (error) {
     console.error('Signup error:', error);
+
+    // Check if it's a Sanity permission error
+    if (error instanceof Error && error.message.includes('permission')) {
+      return NextResponse.json(
+        { error: 'Server configuration error - check Sanity permissions' },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
       {
         error: 'Failed to sign up',
