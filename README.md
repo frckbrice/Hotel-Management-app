@@ -173,3 +173,4 @@ yarn test:coverage # Coverage report
 - **GitHub**: [@frckbrice](https://github.com/frckbrice)
 - **LinkedIn**: [avom evariste](https://www.linkedin.com/in/avom-brice/)
 - **Portfolio**: [maebrieporfolio.vercel.app](https://maebrieporfolio.vercel.app)
+
