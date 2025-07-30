@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
-import { useThemeContext } from '@/app/(web)/themeProvider/ThemeProvider';
+import { useThemeContext } from '@/app/themeProvider/ThemeProvider';
 import { FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
 import { useSession } from 'next-auth/react';

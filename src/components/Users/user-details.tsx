@@ -1,18 +1,16 @@
 'use client';
 
-import { getUserBookings, getUserData } from '@/libs/apis';
+import { getUserBookings } from '@/libs/apis';
 import useSWR from 'swr';
-import LoadingSpinner from '@/app/(web)/loading';
+import LoadingSpinner from '@/app/loading';
 import axios from 'axios';
 import { User } from '@/components/models/user';
-import { Booking } from '@/components/models/booking';
 import Image from 'next/image';
-import { FaRegUserCircle, FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
+import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import { signOut, useSession } from 'next-auth/react';
 import { useState, useEffect, useRef } from 'react';
 import { BsJournalBookmarkFill } from 'react-icons/bs';
 import { GiMoneyStack } from 'react-icons/gi';
-import { FiRefreshCw } from 'react-icons/fi';
 import { useSearchParams } from 'next/navigation';
 import Table from '@/components/Table/table';
 import Chart from '@/components/Chart/Chart';

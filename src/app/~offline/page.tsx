@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Index() {
   return (
-    <>
+    <div className='flex flex-col items-center justify-center h-screen'>
       <Head>
         <title>WELCOME TO HOTEL-AV</title>
       </Head>
@@ -15,6 +15,6 @@ export default function Index() {
         width={600}
         height={400}
       />
-    </>
+    </div>
   );
 }

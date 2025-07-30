@@ -169,7 +169,6 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['react-icons', 'lucide-react'],
   },
   images: {

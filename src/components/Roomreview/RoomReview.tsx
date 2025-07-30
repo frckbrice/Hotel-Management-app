@@ -1,4 +1,4 @@
-import LoadingSpinner from '@/app/(web)/loading';
+import LoadingSpinner from '@/app/loading';
 import axios from 'axios';
 import React from 'react';
 import useSWR from 'swr';

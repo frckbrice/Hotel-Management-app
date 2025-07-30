@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import useSWR from 'swr';
-import { useParams } from 'next/navigation';
 import { MdOutlineCleaningServices } from 'react-icons/md';
 import { LiaFireExtinguisherSolid } from 'react-icons/lia';
 import { AiOutlineMedicineBox } from 'react-icons/ai';
@@ -9,7 +8,7 @@ import { GiSmokeBomb } from 'react-icons/gi';
 
 import axios from 'axios';
 import { getRoom } from '@/libs/apis';
-import LoadingSpinner from '@/app/(web)/loading';
+import LoadingSpinner from '@/app/loading';
 import HotelPhotoGallery from '@/components/HotelGalleryPhoto/HotelgalleryPhoto';
 import toast from 'react-hot-toast';
 import BookRoomCta from '@/components/BookRoomCta/BookRoomCta';
