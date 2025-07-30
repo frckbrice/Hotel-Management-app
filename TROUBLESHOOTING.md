@@ -493,6 +493,67 @@ try {
 - [ ] Incident response plan
 - [ ] Communication protocols
 
+### Issue: Something went wrong" error with "Unexpected token '<', "<!DOCTYPE "..."
+
+**Cause**: Missing Environment Variables: The application couldn't connect to Sanity because required environment variables weren't set.
+**Solution**:
+
+1. Check that `.env.local` exists in the root directory
+2. Verify all required variables are set
+3. Restart the development server
+
+### Issue: "Server configuration error"
+
+**Cause**: Missing Sanity tokens or project ID
+**Solution**: The authSanityClient was using SANITY_STUDIO_TOKEN instead of SANITY_WRITE_TOKEN for write operations;
+
+1. Verify `NEXT_PUBLIC_SANITY_PROJECT_ID` is set
+2. Verify `SANITY_WRITE_TOKEN` has write permissions
+3. Check Sanity project settings
+
+### Issue: "User already exists"
+
+**Cause**: User with same email already exists
+**Solution**:
+
+1. Try with a different email
+2. Or delete the user from Sanity Studio
+
+### Issue: OAuth not working
+
+**Cause**: Missing OAuth configuration
+**Solution**:
+
+1. Set up GitHub/Google OAuth apps
+2. Add the client IDs and secrets to `.env.local`
+3. Ensure callback URLs are correct
+
+## 📋 Environment Variable Checklist
+
+- [ ] `.env.local` file created in root directory
+- [ ] `NEXTAUTH_URL` set to `http://localhost:3000`
+- [ ] `NEXTAUTH_SECRET` set to a random string
+- [ ] `NEXT_PUBLIC_SANITY_PROJECT_ID` set to your Sanity project ID
+- [ ] `NEXT_PUBLIC_SANITY_DATASET` set to `production`
+- [ ] `SANITY_WRITE_TOKEN` set with write permissions
+- [ ] Development server restarted after adding variables
+
+## 🔒 Security Notes
+
+1. **Never commit `.env.local`** - it's already in `.gitignore`
+2. **Use different secrets for production**
+3. **Rotate tokens regularly**
+4. **Use environment-specific values**
+
+## 🚀 Production Deployment
+
+For production (Vercel), add these environment variables in the Vercel dashboard:
+
+1. Go to your project in Vercel
+2. Navigate to Settings → Environment Variables
+3. Add each variable from `.env.local`
+4. Set the appropriate environment (Production, Preview, Development)
+
 ---
 
 **Last Updated**: January 2025  
