@@ -35,16 +35,16 @@ const RoomReview = ({ roomId }: Props) => {
         roomReviews?.map((review: Review) => (
           <div
             key={review._id}
-            className=" bg-gray-100 dark:bg-gray-900 p-4 rounded-lg"
+            className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md border border-green-200 dark:border-green-700"
           >
             <div className="font-semibold mb-2 flex">
-              <p className="">{review.user.name} </p>
-              <div className=" ml-4 flex items-center text-tertiary-light text-lg">
+              <p className="text-gray-800 dark:text-white">{review.user.name}</p>
+              <div className="ml-4 flex items-center text-green-600 dark:text-green-400 text-lg">
                 <Rating rating={review.userRating} />
               </div>
             </div>
 
-            <p>{review.text} </p>
+            <p className="text-gray-700 dark:text-gray-300 text-justify">{review.text}</p>
           </div>
         ))}
     </div>

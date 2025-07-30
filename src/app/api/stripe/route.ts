@@ -3,7 +3,7 @@ import { getRoom } from "@/libs/apis";
 import { authOptions } from "@/libs/auth";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { stripe } from "@/libs/stripe";
+import { getServerStripe } from "@/libs/stripe";
 
 type RequestData = {
   checkinDate: string;
@@ -55,6 +55,7 @@ export async function POST(req: Request) {
     const totalPrice = discountPrice * numberOfDays;
 
     //*create stripe payement
+    const stripe = getServerStripe();
 
     const stripeSession = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -72,7 +73,7 @@ export async function POST(req: Request) {
         },
       ],
       payment_method_types: ["card"],
-      success_url: `${origin}/users/${userId}`,
+      success_url: `${origin}/users/${userId}?payment_status=success`,
       metadata: {
         adults,
         checkinDate: formattedCheckinDate,

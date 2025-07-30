@@ -13,7 +13,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   // disable: process.env.NODE_ENV === "development",
   register: true,
   scope: "/app",
-  sw: "service-worker.js",
+  sw: "sw.js",
   fallbacks: {
     image: "/assets/icons/icon-512x512.png",
   },
@@ -42,6 +42,12 @@ const nextConfig = {
       },
       {
         hostname: "media.istockphoto.com",
+      },
+      {
+        hostname: "images.pexels.com",
+      },
+      {
+        hostname: "avatars.githubusercontent.com",
       },
     ],
   },

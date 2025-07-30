@@ -58,10 +58,10 @@ const HotelPhotoGallery: FC<{ photos: ImageType[] }> = ({ photos }) => {
         </div>
         <div className="md:hidden flex justify-between items-center">
           <div className="flex space-x-2">
-            <FaArrowLeft className="cursor-pointer" onClick={handlePrevious} />
-            <FaArrowRight className="cursor-pointer" onClick={handleNext} />
+            <FaArrowLeft className="cursor-pointer text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" onClick={handlePrevious} />
+            <FaArrowRight className="cursor-pointer text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300" onClick={handleNext} />
           </div>
-          <span>
+          <span className="text-gray-700 dark:text-gray-300">
             {currenPhotoIndex + 1} / {photos.length}
           </span>
         </div>
@@ -112,11 +112,11 @@ const HotelPhotoGallery: FC<{ photos: ImageType[] }> = ({ photos }) => {
               <div className="flex justify-between items-center py-3">
                 <div className="flex space-x-2 items-center text-white">
                   <FaArrowLeft
-                    className="cursor-pointer"
+                    className="cursor-pointer hover:text-green-400"
                     onClick={handlePrevious}
                   />
                   <FaArrowRight
-                    className="cursor-pointer"
+                    className="cursor-pointer hover:text-green-400"
                     onClick={handleNext}
                   />
                 </div>
@@ -128,7 +128,7 @@ const HotelPhotoGallery: FC<{ photos: ImageType[] }> = ({ photos }) => {
                 className="absolute top-2 right-2 text-white text-lg"
                 onClick={closeModal}
               >
-                <MdCancel className="font-medium md:text-5xl text-2xl text-tertiary-dark" />
+                <MdCancel className="font-medium md:text-5xl text-2xl text-green-400 hover:text-green-300" />
               </button>
             </div>
           </div>

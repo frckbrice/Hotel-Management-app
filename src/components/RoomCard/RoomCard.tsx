@@ -2,40 +2,72 @@ import { FC } from "react";
 import Image from "next/image";
 import { Room } from "../models/room";
 import Link from "next/link";
+import { BadgeCheck, Ban } from "lucide-react";
+
 type Props = {
   room: Room;
 };
-const RoomCard: FC<Props> = (props) => {
-  const {
-    room: { coverImage, name, price, type, description, slug, isBooked },
-  } = props;
+
+const RoomCard: FC<Props> = ({ room }) => {
+  const { coverImage, name, price, type, description, slug, isBooked } = room;
+
   return (
-    <div className="rounded-xl w-72 mb-10 mx-auto md:mx-0 overflow-hidden text-black">
-      <div className="h-60 overflow-hidden">
+    <div className="group relative w-full max-w-sm rounded-2xl overflow-hidden shadow-md hover:shadow-xl bg-white dark:bg-gray-900 transition-all duration-300">
+      {/* Badge for room type */}
+      <div className="absolute top-4 right-4 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-800 dark:text-white shadow-sm">
+        {type} Room
+      </div>
+      <div className="relative h-56 w-full">
         <Image
           src={coverImage.url}
           alt={name}
-          width={250}
-          height={250}
+          fill
+          className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
           priority
-          className="img scale-animation"
         />
+        {isBooked && (
+          <div className="absolute top-2 right-2 bg-red-600 text-white text-sm px-3 py-1 rounded-full shadow-md z-10">
+            Booked
+          </div>
+        )}
       </div>
-      <div className="p-4 bg-white">
-        <div className="flex justify-between text-xl font-semibold">
-          <p>{name}</p>
-          <p>$ {price}</p>
+
+      <div className="p-5">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white">{name}</h3>
+          <span className="text-green-600 dark:text-green-400 font-semibold text-lg">
+            ${price}
+          </span>
         </div>
-        <p className="pt-2 text-md font-bold">{type} Room</p>
-        <p className="pt-3 pb-6">{description.slice(1, 100)}...</p>
+
+        <div className="mb-2 text-sm font-medium text-green-700 dark:text-green-300 uppercase tracking-wide">
+          {type} Room
+        </div>
+
+        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 text-justify">
+          {description.slice(0, 100)}...
+        </p>
+
         <Link
           href={`/rooms/${slug.current}`}
-          className="bg-primary inline-block text-center w-full py-4 rounded-xl text-white text-xl font-bold hover:-translate-y-2 hover:shadow-lg transition-all duration-500"
+          className={`w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-white font-semibold text-sm tracking-wide transition-all duration-300 shadow-lg ${isBooked
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 hover:shadow-xl hover:-translate-y-1"
+            }`}
         >
-          {isBooked ? "BOOKED" : "BOOK NOW"}
+          {isBooked ? (
+            <>
+              <Ban size={16} /> Unavailable
+            </>
+          ) : (
+            <>
+              <BadgeCheck size={16} /> Book Now
+            </>
+          )}
         </Link>
       </div>
     </div>
   );
 };
+
 export default RoomCard;

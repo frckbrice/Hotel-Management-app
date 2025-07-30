@@ -89,42 +89,42 @@ const RoomDetails = ({ slug }: RoomDetailsProps) => {
     };
 
     return (
-        <div>
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800 p-5 pb-10">
             <HotelPhotoGallery photos={room.images} />
             <div className="container mx-auto mt-20">
                 <div className="md:grid md:grid-cols-12 gap-10 px-3">
                     <div className="md:col-span-8 md:w-full">
                         <div>
-                            <h2 className="font-bold text-left text-lg md:text-2xl">
+                            <h2 className="font-bold text-left text-lg md:text-2xl text-gray-800 dark:text-white">
                                 {room.name} ({room.dimension})
                             </h2>
                             <div className="flex my-11">
                                 {room.offeredAmenities.map((amenity) => (
                                     <div
                                         key={amenity._key}
-                                        className="md:w-44 w-fit text-center px-2 md:px-0 h-20 md:h-40 mr-3 bg-[#EFF0F2] dark:bg-gray-800 rounded-lg grid place-content-center"
+                                        className="md:w-44 w-fit text-center px-2 md:px-0 h-20 md:h-40 mr-3 bg-white dark:bg-gray-800 rounded-lg shadow-lg grid place-content-center border border-green-200 dark:border-green-700"
                                     >
-                                        <i className={`fa-solid ${amenity.icon} md:text-2xl`}></i>
-                                        <p className="text-xs md:text-base pt-3">
+                                        <i className={`fa-solid ${amenity.icon} md:text-2xl text-green-600 dark:text-green-400`}></i>
+                                        <p className="text-xs md:text-base pt-3 text-gray-700 dark:text-gray-300">
                                             {amenity.amenity}
                                         </p>
                                     </div>
                                 ))}
                             </div>
                             <div className="mb-11">
-                                <h2 className="font-bold text-3xl mb-2">Description</h2>
-                                <p>{room.description}</p>
+                                <h2 className="font-bold text-3xl mb-2 text-gray-800 dark:text-white">Description</h2>
+                                <p className="text-gray-700 dark:text-gray-300 text-justify">{room.description}</p>
                             </div>
                             <div className="mb-11">
-                                <h2 className="font-bold text-3xl mb-2">Offered Amenities</h2>
+                                <h2 className="font-bold text-3xl mb-2 text-gray-800 dark:text-white">Offered Amenities</h2>
                                 <div className="grid grid-cols-2">
                                     {room.offeredAmenities.map((amenity) => (
                                         <div
                                             key={amenity._key}
                                             className="flex items-center md:my-0 my-1"
                                         >
-                                            <i className={`fa-solid ${amenity.icon}`}></i>
-                                            <p className="text-xs md:text-base ml-2">
+                                            <i className={`fa-solid ${amenity.icon} text-green-600 dark:text-green-400`}></i>
+                                            <p className="text-xs md:text-base ml-2 text-gray-700 dark:text-gray-300">
                                                 {amenity.amenity}
                                             </p>
                                         </div>
@@ -132,33 +132,33 @@ const RoomDetails = ({ slug }: RoomDetailsProps) => {
                                 </div>
                             </div>
                             <div className="mb-11">
-                                <h2 className="font-bold text-3xl mb-2">Safety And Hygiene</h2>
+                                <h2 className="font-bold text-3xl mb-2 text-gray-800 dark:text-white">Safety And Hygiene</h2>
                                 <div className="grid grid-cols-2">
                                     <div className="flex items-center my-1 md:my-0">
-                                        <MdOutlineCleaningServices />
-                                        <p className="ml-2 md:text-base text-xs">Daily Cleaning</p>
+                                        <MdOutlineCleaningServices className="text-green-600 dark:text-green-400" />
+                                        <p className="ml-2 md:text-base text-xs text-gray-700 dark:text-gray-300">Daily Cleaning</p>
                                     </div>
                                     <div className="flex items-center my-1 md:my-0">
-                                        <LiaFireExtinguisherSolid />
-                                        <p className="ml-2 md:text-base text-xs">
+                                        <LiaFireExtinguisherSolid className="text-green-600 dark:text-green-400" />
+                                        <p className="ml-2 md:text-base text-xs text-gray-700 dark:text-gray-300">
                                             Fire Extinguishers
                                         </p>
                                     </div>
                                     <div className="flex items-center my-1 md:my-0">
-                                        <AiOutlineMedicineBox />
-                                        <p className="ml-2 md:text-base text-xs">
+                                        <AiOutlineMedicineBox className="text-green-600 dark:text-green-400" />
+                                        <p className="ml-2 md:text-base text-xs text-gray-700 dark:text-gray-300">
                                             Disinfections and Sterilizations
                                         </p>
                                     </div>
                                     <div className="flex items-center my-1 md:my-0">
-                                        <GiSmokeBomb />
-                                        <p className="ml-2 md:text-base text-xs">Smoke Detectors</p>
+                                        <GiSmokeBomb className="text-green-600 dark:text-green-400" />
+                                        <p className="ml-2 md:text-base text-xs text-gray-700 dark:text-gray-300">Smoke Detectors</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="shadow dark:shadow-white rounded-lg p-6">
+                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 border border-green-200 dark:border-green-700">
                                 <div className="items-center mb-4">
-                                    <p className="md:text-lg font-semibold">Customer Reviews</p>
+                                    <p className="md:text-lg font-semibold text-gray-800 dark:text-white">Customer Reviews</p>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {/* <span className=" text-red-400">In building process</span>{" "}
@@ -168,7 +168,7 @@ const RoomDetails = ({ slug }: RoomDetailsProps) => {
                             </div>
                         </div>
                     </div>
-                    <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-auto">
+                    <div className="md:col-span-4 rounded-xl bg-white dark:bg-gray-800 shadow-xl border border-green-200 dark:border-green-700 sticky top-10 md:top-20 h-fit overflow-auto">
                         <BookRoomCta
                             discount={room.discount}
                             price={room.price}
