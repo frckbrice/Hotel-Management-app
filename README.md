@@ -143,6 +143,7 @@ yarn test:coverage # Coverage report
 - **Security Scanning**: Snyk vulnerability detection
 - **Deployment**: Automatic Vercel deployment on main branch
 
+
 ## 🎨 Design System
 
 - **Modern UI/UX** with Tailwind CSS
@@ -173,3 +174,4 @@ yarn test:coverage # Coverage report
 - **GitHub**: [@frckbrice](https://github.com/frckbrice)
 - **LinkedIn**: [avom evariste](https://www.linkedin.com/in/avom-brice/)
 - **Portfolio**: [maebrieporfolio.vercel.app](https://maebrieporfolio.vercel.app)
+
