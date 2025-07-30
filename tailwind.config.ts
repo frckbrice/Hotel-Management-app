@@ -4,11 +4,16 @@ const { fontFamily } = require("tailwindcss/defaultTheme");
 const config: Config = {
   darkMode: "class",
   content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '475px',
+      },
       animation: {
         'bounce-slow': 'bounce-slow 8s infinite',
         'bounce-slow-reverse': 'bounce-slow-reverse 8s infinite',
