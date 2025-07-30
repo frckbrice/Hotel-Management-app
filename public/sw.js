@@ -35,6 +35,14 @@ define(['./workbox-f1770938'], function (e) {
     e.precacheAndRoute(
       [
         {
+          url: '/_next/static/WUcgGPBkDtI8I28FqCTly/_buildManifest.js',
+          revision: '4689730de110fd05bd1ff8abef34c164',
+        },
+        {
+          url: '/_next/static/WUcgGPBkDtI8I28FqCTly/_ssgManifest.js',
+          revision: 'b6652df95db52feb4daf4eca35380933',
+        },
+        {
           url: '/_next/static/chunks/272.162dce3162f543b2.js',
           revision: '162dce3162f543b2',
         },
@@ -215,14 +223,6 @@ define(['./workbox-f1770938'], function (e) {
           revision: '65850a373e258f1c897a2b3d75eb74de',
         },
         {
-          url: '/_next/static/vs5GacK6GVxXhbUQ59tpN/_buildManifest.js',
-          revision: '4689730de110fd05bd1ff8abef34c164',
-        },
-        {
-          url: '/_next/static/vs5GacK6GVxXhbUQ59tpN/_ssgManifest.js',
-          revision: 'b6652df95db52feb4daf4eca35380933',
-        },
-        {
           url: '/assets/icons/icon-128x128.png',
           revision: 'b937f24aad62c0247d1521130d2ac956',
         },
@@ -385,7 +385,7 @@ define(['./workbox-f1770938'], function (e) {
         },
         { url: '/manifest.json', revision: '2672bf502a4aece89f34b0d956e5e789' },
         { url: '/og-image.jpg', revision: '1afa6f745b2eb84e3a4274b786c51bb4' },
-        { url: '/~offline', revision: 'vs5GacK6GVxXhbUQ59tpN' },
+        { url: '/~offline', revision: 'WUcgGPBkDtI8I28FqCTly' },
       ],
       { ignoreURLParametersMatching: [/^utm_/, /^fbclid$/] }
     ),
