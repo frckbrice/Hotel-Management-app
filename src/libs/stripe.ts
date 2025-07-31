@@ -6,9 +6,7 @@ let stripePromise: Promise<Stripejs | null>;
 
 export const getStripe = () => {
   if (!stripePromise) {
-    stripePromise = loadStripe(
-      process.env.NEXT_PUBLIC_PUBLISHABLE_KEY as string
-    );
+    stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY as string);
   }
   return stripePromise;
 };

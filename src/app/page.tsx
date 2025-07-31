@@ -14,6 +14,7 @@ const Home = async () => {
       <HeroSection />
       <PageSearch />
       <FeaturedRoom featuredRoom={featuredRoom} />
+      <div />
       <Gallery />
       <Testimonial />
       <NewsLetter />

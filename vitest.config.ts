@@ -15,6 +15,7 @@ export default defineConfig({
       '**/.{idea,git,cache,output,temp}/**',
       '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
       '**/tests/e2e/**', // Exclude E2E tests
+      '**/src/test/e2e/**', // Exclude E2E tests in src/test
       '**/playwright.config.ts',
     ],
     coverage: {
@@ -27,6 +28,7 @@ export default defineConfig({
         '**/*.config.*',
         '**/coverage/**',
         'tests/e2e/**', // Exclude E2E tests from coverage
+        'src/test/e2e/**', // Exclude E2E tests from coverage
       ],
     },
   },

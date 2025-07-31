@@ -1,6 +1,6 @@
 # 🏨 HotelMT - Full-Stack Hotel Management Platform
 
-A full-stack, production-ready hotel booking platform built with cutting-edge technologies and modern development practices. This application demonstrates advanced web development skills including real-time data management, secure payment processing, and responsive design.
+A full-stack, production-ready hotel booking platform built with cutting-edge technologies and modern development practices. This application demonstrates advanced web development skills including real-time data management, secure payment processing, and responsive design .
 
 ![HotelMT Dashboard](public/hotelmgt/hmgt_3.png)
 
