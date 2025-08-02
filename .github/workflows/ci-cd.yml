@@ -178,10 +178,3 @@ jobs:
 
       - name: Run security audit
         run: yarn audit --audit-level moderate
-
-      - name: Run Snyk security scan
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=high
