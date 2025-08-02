@@ -1,50 +1,33 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi } from "vitest";
 
-// Mock NextAuth
-vi.mock('next-auth', () => ({
-  getServerSession: vi.fn(),
-}));
-
-// Mock Sanity client
-vi.mock('@/libs/sanity', () => ({
-  default: {
-    fetch: vi.fn(),
-  },
-  authSanityClient: {
-    fetch: vi.fn(),
-  },
-}));
-
-describe('API Integration Tests', () => {
-  describe('User API', () => {
-    it('should handle authentication check', async () => {
-      // Test authentication logic
-      const mockGetServerSession = vi.mocked(
-        require('next-auth').getServerSession
-      );
+describe("API Integration Tests", () => {
+  describe("User API", () => {
+    it("should handle authentication check", async () => {
+      // Mock authentication logic
+      const mockGetServerSession = vi.fn();
 
       // Test unauthenticated case
       mockGetServerSession.mockResolvedValue(null);
-      expect(mockGetServerSession()).resolves.toBeNull();
+      await expect(mockGetServerSession()).resolves.toBeNull();
 
       // Test authenticated case
       mockGetServerSession.mockResolvedValue({
-        user: { id: '1', email: 'test@example.com' },
+        user: { id: "1", email: "test@example.com" },
       });
-      expect(mockGetServerSession()).resolves.toMatchObject({
-        user: { id: '1', email: 'test@example.com' },
+      await expect(mockGetServerSession()).resolves.toMatchObject({
+        user: { id: "1", email: "test@example.com" },
       });
     });
 
-    it('should handle user data fetching', async () => {
-      const mockFetch = vi.mocked(require('@/libs/sanity').default.fetch);
+    it("should handle user data fetching", async () => {
+      const mockFetch = vi.fn();
 
       const mockUsers = [
         {
-          _id: '1',
-          name: 'avom brice',
-          email: 'avom@example.com',
-          image: 'https://example.com/avatar.jpg',
+          _id: "1",
+          name: "John Doe",
+          email: "john@example.com",
+          image: "https://example.com/avatar.jpg",
         },
       ];
 
@@ -54,42 +37,40 @@ describe('API Integration Tests', () => {
       expect(result).toEqual(mockUsers);
     });
 
-    it('should handle user creation', async () => {
-      const mockAuthFetch = vi.mocked(
-        require('@/libs/sanity').authSanityClient.fetch
-      );
+    it("should handle user creation", async () => {
+      const mockAuthFetch = vi.fn();
 
       const userData = {
-        name: 'maebrie brie',
-        email: 'maebrie@example.com',
-        password: 'password123',
+        name: "Jane Doe",
+        email: "jane@example.com",
+        password: "password123",
       };
 
       mockAuthFetch.mockResolvedValue({
-        _id: '2',
+        _id: "2",
         ...userData,
       });
 
-      const result = await mockAuthFetch('create', userData);
+      const result = await mockAuthFetch("create", userData);
       expect(result).toMatchObject({
-        _id: '2',
-        name: 'maebrie brie',
-        email: 'maebrie@example.com',
+        _id: "2",
+        name: "Jane Doe",
+        email: "jane@example.com",
       });
     });
   });
 
-  describe('Room API', () => {
-    it('should handle room data fetching', async () => {
-      const mockFetch = vi.mocked(require('@/libs/sanity').default.fetch);
+  describe("Room API", () => {
+    it("should handle room data fetching", async () => {
+      const mockFetch = vi.fn();
 
       const mockRooms = [
         {
-          _id: '1',
-          name: 'Luxury Suite',
-          description: 'A beautiful suite',
+          _id: "1",
+          name: "Luxury Suite",
+          description: "A beautiful suite",
           price: 299,
-          coverImage: { url: '/test-image.jpg' },
+          coverImage: { url: "/test-image.jpg" },
         },
       ];
 
@@ -100,17 +81,15 @@ describe('API Integration Tests', () => {
     });
   });
 
-  describe('Booking API', () => {
-    it('should handle booking creation', async () => {
-      const mockAuthFetch = vi.mocked(
-        require('@/libs/sanity').authSanityClient.fetch
-      );
+  describe("Booking API", () => {
+    it("should handle booking creation", async () => {
+      const mockAuthFetch = vi.fn();
 
       const bookingData = {
-        user: 'user1',
-        hotelRoom: 'room1',
-        checkinDate: '2024-01-01',
-        checkoutDate: '2024-01-03',
+        user: "user1",
+        hotelRoom: "room1",
+        checkinDate: "2024-01-01",
+        checkoutDate: "2024-01-03",
         numberOfDays: 2,
         adults: 2,
         children: 0,
@@ -119,15 +98,15 @@ describe('API Integration Tests', () => {
       };
 
       mockAuthFetch.mockResolvedValue({
-        _id: 'booking1',
+        _id: "booking1",
         ...bookingData,
       });
 
-      const result = await mockAuthFetch('create', bookingData);
+      const result = await mockAuthFetch("create", bookingData);
       expect(result).toMatchObject({
-        _id: 'booking1',
-        user: 'user1',
-        hotelRoom: 'room1',
+        _id: "booking1",
+        user: "user1",
+        hotelRoom: "room1",
         totalPrice: 598,
       });
     });

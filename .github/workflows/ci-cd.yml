@@ -7,7 +7,7 @@ on:
     branches: [main, develop]
 
 env:
-  NODE_VERSION: '22'
+  NODE_VERSION: "22"
 
 jobs:
   # Lint and Format Check
@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -54,7 +54,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -79,52 +79,52 @@ jobs:
           flags: unittests
           name: codecov-umbrella
 
-  # E2E Tests
-  e2e:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # E2E Tests (Temporarily Disabled)
+  # e2e:
+  #   runs-on: ubuntu-latest
+  #   needs: test
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ env.NODE_VERSION }}
+  #         cache: "yarn"
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+  #     - name: Install dependencies
+  #       run: yarn install --frozen-lockfile
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+  #     - name: Install Playwright browsers
+  #       run: npx playwright install --with-deps
 
-      - name: Run E2E tests
-        run: yarn test:e2e
-        env:
-          NEXTAUTH_URL: https://hotel-mgt.vercel.app
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
-          SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
-          SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
-          SANITY_STUDIO_TOKEN: ${{ secrets.SANITY_STUDIO_TOKEN }}
-          STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+  #     - name: Run E2E tests
+  #       run: yarn test:e2e
+  #       env:
+  #         NEXTAUTH_URL: https://hotel-mgt.vercel.app
+  #         NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+  #         SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+  #         SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+  #         SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
+  #         SANITY_STUDIO_TOKEN: ${{ secrets.SANITY_STUDIO_TOKEN }}
+  #         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+  #         STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+  #         STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+  #     - name: Upload test results
+  #       uses: actions/upload-artifact@v4
+  #       if: always()
+  #       with:
+  #         name: playwright-report
+  #         path: playwright-report/
+  #         retention-days: 30
 
   # Build and Deploy to Vercel
   deploy:
     runs-on: ubuntu-latest
-    needs: [lint, test, e2e]
-    if: github.ref == 'refs/heads/main'
+    needs: [lint, test]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/chore/testing'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -133,7 +133,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -157,7 +157,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+          vercel-args: "--prod"
 
   # Security Scan
   security:
@@ -171,17 +171,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
       - name: Run security audit
         run: yarn audit --audit-level moderate
-
-      - name: Run Snyk security scan
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=high

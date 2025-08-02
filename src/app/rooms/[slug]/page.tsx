@@ -1,5 +1,6 @@
-import RoomDetails from '@/components/Room/room-detail';
-import { notFound } from 'next/navigation';
+import RoomDetails from "@/components/pages/Room/room-detail";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -11,8 +12,9 @@ type Props = {
 // The generateMetadata function is used to set the title and description of the page dynamically based on the slug.
 
 // generate metadata for the page
-export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   return {
     title: `Room Details - ${slug}`,
     description: `Details of the room with slug ${slug}`,
@@ -20,7 +22,8 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function Page({ params }: Props) {
-  const { slug } = await params;
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
 
   if (!slug) return notFound();
 

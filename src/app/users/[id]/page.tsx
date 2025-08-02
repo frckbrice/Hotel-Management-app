@@ -1,4 +1,4 @@
-import UserDetails from '@/components/Users/user-details';
+import UserDetails from "@/components/pages/Users/user-details";
 
 type Props = {
   params: Promise<{
@@ -6,7 +6,7 @@ type Props = {
   }>;
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const Page = async ({ params }: Props) => {
   const { id } = await params;
