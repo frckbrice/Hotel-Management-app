@@ -1,0 +1,20 @@
+[
+  {
+    "url": "http://localhost:3000",
+    "timestamp": "2025-08-01T18:29:50.421Z",
+    "responseTime": 106,
+    "statusCode": 200,
+    "contentLength": "unknown",
+    "server": "unknown",
+    "date": "Fri, 01 Aug 2025 18:29:50 GMT"
+  },
+  {
+    "url": "http://localhost:3000",
+    "timestamp": "2025-08-01T18:42:31.559Z",
+    "responseTime": 162,
+    "statusCode": 200,
+    "contentLength": "unknown",
+    "server": "unknown",
+    "date": "Fri, 01 Aug 2025 18:42:31 GMT"
+  }
+]

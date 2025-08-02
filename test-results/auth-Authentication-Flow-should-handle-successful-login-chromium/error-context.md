@@ -2,141 +2,141 @@
 
 ```yaml
 - link "Skip to main content":
-  - /url: "#main-content"
+    - /url: "#main-content"
 - main:
-  - banner "Main navigation":
-    - link "HotelMT - Go to homepage":
-      - /url: /
-      - text: HotelMT
-    - navigation "Main navigation":
-      - link "Navigate to the home page":
+    - banner "Main navigation":
+        - link "HotelMT - Go to homepage":
+            - /url: /
+            - text: HotelMT
+        - navigation "Main navigation":
+            - link "Navigate to the home page":
+                - /url: /
+                - text: Home
+            - link "Browse available hotel rooms":
+                - /url: /rooms
+                - text: Rooms
+            - link "View hotel photos and amenities":
+                - /url: /gallery
+                - text: Gallery
+            - link "Get in touch with us":
+                - /url: /contact
+                - text: Contact
+        - link "Sign in to your account":
+            - /url: /auth
+            - text: Sign In
+        - button "Switch to dark mode"
+    - main:
+        - heading "Create an Account" [level=1]
+        - paragraph: OR
+        - img
+        - text: "|"
+        - img
+        - textbox "your name"
+        - textbox "name@compagny.com"
+        - textbox "password"
+        - button "Sign Up"
+        - button "Already have an account? Login"
+    - link "HotelMT":
         - /url: /
-        - text: Home
-      - link "Browse available hotel rooms":
-        - /url: /rooms
-        - text: Rooms
-      - link "View hotel photos and amenities":
-        - /url: /gallery
-        - text: Gallery
-      - link "Get in touch with us":
-        - /url: /contact
-        - text: Contact
-    - link "Sign in to your account":
-      - /url: /auth
-      - text: Sign In
-    - button "Switch to dark mode"
-  - main:
-    - heading "Create an Account" [level=1]
-    - paragraph: OR
+    - paragraph: Experience luxury and comfort at its finest. Your perfect getaway awaits with world-class amenities and exceptional service.
     - img
-    - text: "|"
+    - heading "Contact" [level=4]
     - img
-    - textbox "your name"
-    - textbox "name@compagny.com"
-    - textbox "password"
-    - button "Sign Up"
-    - button "Already have an account? Login"
-  - link "HotelMT":
-    - /url: /
-  - paragraph: Experience luxury and comfort at its finest. Your perfect getaway awaits with world-class amenities and exceptional service.
-  - img
-  - heading "Contact" [level=4]
-  - img
-  - paragraph: Address
-  - paragraph: 123 Road, Avom
-  - img
-  - paragraph: Phone
-  - paragraph: 674-852-304
-  - img
-  - paragraph: Portfolio
-  - link "Check my work":
-    - /url: https://maebrieporfolio.vercel.app/
-    - text: Check my work
+    - paragraph: Address
+    - paragraph: 123 Road, Avom
     - img
-  - heading "Company" [level=4]:
+    - paragraph: Phone
+    - paragraph: 674-852-304
     - img
-    - text: Company
-  - list:
-    - listitem:
-      - link "Our story":
-        - /url: /about
-        - text: Our story
+    - paragraph: Portfolio
+    - link "Check my work":
+        - /url: https://maebrieporfolio.vercel.app/
+        - text: Check my work
         - img
-    - listitem:
-      - link "Get in touch":
-        - /url: /contact
-        - text: Get in touch
+    - heading "Company" [level=4]:
         - img
-    - listitem:
-      - link "Our privacy commitment":
+        - text: Company
+    - list:
+        - listitem:
+            - link "Our story":
+                - /url: /about
+                - text: Our story
+                - img
+        - listitem:
+            - link "Get in touch":
+                - /url: /contact
+                - text: Get in touch
+                - img
+        - listitem:
+            - link "Our privacy commitment":
+                - /url: /privacy
+                - text: Our privacy commitment
+                - img
+        - listitem:
+            - link "Terms of service":
+                - /url: /terms
+                - text: Terms of service
+                - img
+        - listitem:
+            - link "Customer Assistance":
+                - /url: /support
+                - text: Customer Assistance
+                - img
+    - heading "Services" [level=4]:
+        - img
+        - text: Services
+    - list:
+        - listitem:
+            - link "Dining Experience":
+                - /url: /dining
+                - img
+                - text: Dining Experience
+        - listitem:
+            - link "Wellness":
+                - /url: /wellness
+                - img
+                - text: Wellness
+        - listitem:
+            - link "Fitness":
+                - /url: /fitness
+                - img
+                - text: Fitness
+        - listitem:
+            - link "Swimming Pool":
+                - /url: /pool
+                - img
+                - text: Swimming Pool
+        - listitem:
+            - link "Events":
+                - /url: /events
+                - img
+                - text: Events
+    - heading "Stay Connected" [level=4]
+    - paragraph: Subscribe to our newsletter for exclusive offers and updates.
+    - textbox "Enter your email"
+    - button:
+        - img
+    - paragraph: Follow us on social media
+    - link:
+        - /url: "#"
+        - img
+    - link:
+        - /url: "#"
+        - img
+    - link:
+        - /url: "#"
+        - img
+    - link:
+        - /url: "#"
+        - img
+    - text: © 2025 HotelMT. All rights reserved. • Made with
+    - img
+    - text: in Cameroon
+    - link "Privacy Policy":
         - /url: /privacy
-        - text: Our privacy commitment
-        - img
-    - listitem:
-      - link "Terms of service":
+    - link "Terms":
         - /url: /terms
-        - text: Terms of service
-        - img
-    - listitem:
-      - link "Customer Assistance":
-        - /url: /support
-        - text: Customer Assistance
-        - img
-  - heading "Services" [level=4]:
-    - img
-    - text: Services
-  - list:
-    - listitem:
-      - link "Dining Experience":
-        - /url: /dining
-        - img
-        - text: Dining Experience
-    - listitem:
-      - link "Wellness":
-        - /url: /wellness
-        - img
-        - text: Wellness
-    - listitem:
-      - link "Fitness":
-        - /url: /fitness
-        - img
-        - text: Fitness
-    - listitem:
-      - link "Swimming Pool":
-        - /url: /pool
-        - img
-        - text: Swimming Pool
-    - listitem:
-      - link "Events":
-        - /url: /events
-        - img
-        - text: Events
-  - heading "Stay Connected" [level=4]
-  - paragraph: Subscribe to our newsletter for exclusive offers and updates.
-  - textbox "Enter your email"
-  - button:
-    - img
-  - paragraph: Follow us on social media
-  - link:
-    - /url: "#"
-    - img
-  - link:
-    - /url: "#"
-    - img
-  - link:
-    - /url: "#"
-    - img
-  - link:
-    - /url: "#"
-    - img
-  - text: © 2025 HotelMT. All rights reserved. • Made with
-  - img
-  - text: in Cameroon
-  - link "Privacy Policy":
-    - /url: /privacy
-  - link "Terms":
-    - /url: /terms
-  - link "Cookies":
-    - /url: /cookies
+    - link "Cookies":
+        - /url: /cookies
 - alert
 ```

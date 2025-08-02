@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function GET() {
   const envCheck = {
@@ -11,7 +11,7 @@ export async function GET() {
   };
 
   return NextResponse.json({
-    message: 'Environment check',
+    message: "Environment check",
     env: envCheck,
     timestamp: new Date().toISOString(),
   });

@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0;
@@ -196,5 +196,132 @@ img {
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Accessibility Styles */
+@layer base {
+  /* High Contrast Mode */
+  .high-contrast {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+
+  .dark.high-contrast {
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  }
+
+  .high-contrast * {
+    border-color: rgb(0 0 0) !important;
+  }
+
+  .dark.high-contrast * {
+    border-color: rgb(255 255 255) !important;
+  }
+
+  /* Reduced Motion */
+  .reduced-motion *,
+  .reduced-motion *::before,
+  .reduced-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Focus Indicators */
+  .focus-visible {
+    outline: 2px solid #10b981 !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Skip Link */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    border: 2px solid #10b981;
+    border-radius: 0.5rem;
+    background-color: #10b981;
+    color: white;
+    z-index: 9999;
+  }
+}
+
+/* Custom Scrollbar for better accessibility */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(156 163 175) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgb(156 163 175);
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(107 114 128);
+  }
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 640px) {
+  .accessibility-menu {
+    width: calc(100vw - 2rem);
+    right: 1rem;
+    left: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast media query support */
+@media (prefers-contrast: high) {
+  .high-contrast {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+
+  .dark.high-contrast {
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
   }
 }

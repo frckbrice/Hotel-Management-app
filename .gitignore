@@ -26,7 +26,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
+.env.development
+.env.test
+.env.production
 
 # vercel
 .vercel
@@ -35,4 +39,14 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.env 
+# sensitive files
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+
+localhost_2025-07-31_19-40-10.report.html
+project-improvements/performance/
+project-improvements/documentation/quick-fix.sh
+test-results/

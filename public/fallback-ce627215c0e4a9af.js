@@ -1,23 +1,23 @@
 (() => {
   var e = {
-      606: e => {
+      606: (e) => {
         var t,
           r,
           n,
           o = (e.exports = {});
         function i() {
-          throw Error('setTimeout has not been defined');
+          throw Error("setTimeout has not been defined");
         }
         function c() {
-          throw Error('clearTimeout has not been defined');
+          throw Error("clearTimeout has not been defined");
         }
         try {
-          t = 'function' == typeof setTimeout ? setTimeout : i;
+          t = "function" == typeof setTimeout ? setTimeout : i;
         } catch (e) {
           t = i;
         }
         try {
-          r = 'function' == typeof clearTimeout ? clearTimeout : c;
+          r = "function" == typeof clearTimeout ? clearTimeout : c;
         } catch (e) {
           r = c;
         }
@@ -84,11 +84,11 @@
           (h.prototype.run = function () {
             this.fun.apply(null, this.array);
           }),
-          (o.title = 'browser'),
+          (o.title = "browser"),
           (o.browser = !0),
           (o.env = {}),
           (o.argv = []),
-          (o.version = ''),
+          (o.version = ""),
           (o.versions = {}),
           (o.on = A),
           (o.addListener = A),
@@ -103,13 +103,13 @@
             return [];
           }),
           (o.binding = function (e) {
-            throw Error('process.binding is not supported');
+            throw Error("process.binding is not supported");
           }),
           (o.cwd = function () {
-            return '/';
+            return "/";
           }),
           (o.chdir = function (e) {
-            throw Error('process.chdir is not supported');
+            throw Error("process.chdir is not supported");
           }),
           (o.umask = function () {
             return 0;
@@ -118,7 +118,7 @@
     },
     t = {};
   (() => {
-    'use strict';
+    "use strict";
     var r = (function r(n) {
       var o = t[n];
       if (void 0 !== o) return o.exports;
@@ -131,10 +131,10 @@
       }
       return i.exports;
     })(606);
-    self.fallback = async e => {
+    self.fallback = async (e) => {
       let { destination: t, url: n } = e,
         o = {
-          document: '/~offline',
+          document: "/~offline",
           image: r.env.__PWA_FALLBACK_IMAGE__,
           audio: r.env.__PWA_FALLBACK_AUDIO__,
           video: r.env.__PWA_FALLBACK_VIDEO__,
@@ -142,7 +142,7 @@
         }[t];
       return o
         ? caches.match(o, { ignoreSearch: !0 })
-        : '' === t &&
+        : "" === t &&
             r.env.__PWA_FALLBACK_DATA__ &&
             n.match(/\/_next\/data\/.+\/.+\.json$/i)
           ? caches.match(r.env.__PWA_FALLBACK_DATA__, { ignoreSearch: !0 })

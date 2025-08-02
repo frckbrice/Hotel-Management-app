@@ -1,9 +1,9 @@
-import Stripe from 'stripe';
-import { getRoom } from '@/libs/apis';
-import { authOptions } from '@/libs/auth';
-import { getServerSession } from 'next-auth';
-import { NextResponse } from 'next/server';
-import { getServerStripe } from '@/libs/stripe';
+import Stripe from "stripe";
+import { getRoom } from "@/libs/apis";
+import { authOptions } from "@/libs/auth";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
+import { getServerStripe } from "@/libs/stripe";
 
 type RequestData = {
   checkinDate: string;
@@ -31,22 +31,22 @@ export async function POST(req: Request) {
     !hotelRoomSlug ||
     !numberOfDays
   ) {
-    return new NextResponse('please all the fields are required', {
+    return new NextResponse("please all the fields are required", {
       status: 400,
     });
   }
 
-  const origin = req.headers.get('origin');
+  const origin = req.headers.get("origin");
 
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return new NextResponse('Authentication  required', { status: 400 });
+    return new NextResponse("Authentication  required", { status: 400 });
   }
 
   const userId = session.user.id;
-  const formattedCheckoutDate = checkoutDate.split('T')[0];
-  const formattedCheckinDate = checkinDate.split('T')[0];
+  const formattedCheckoutDate = checkoutDate.split("T")[0];
+  const formattedCheckinDate = checkinDate.split("T")[0];
 
   try {
     const room = await getRoom(hotelRoomSlug);
@@ -58,21 +58,21 @@ export async function POST(req: Request) {
     const stripe = getServerStripe();
 
     const stripeSession = await stripe.checkout.sessions.create({
-      mode: 'payment',
+      mode: "payment",
       line_items: [
         {
           quantity: 1,
           price_data: {
-            currency: 'usd',
+            currency: "usd",
             product_data: {
               name: room.name,
-              images: room.images.map(image => image.url),
+              images: room.images.map((image) => image.url),
             },
             unit_amount: parseInt((totalPrice * 100).toString()),
           },
         },
       ],
-      payment_method_types: ['card'],
+      payment_method_types: ["card"],
       success_url: `${origin}/users/${userId}?payment_status=success`,
       metadata: {
         adults,
@@ -89,10 +89,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json(stripeSession, {
       status: 200,
-      statusText: 'Payment session created',
+      statusText: "Payment session created",
     });
   } catch (error: any) {
-    console.log('payement failed in stripe route: ' + error);
+    console.log("payement failed in stripe route: " + error);
     return new NextResponse(error, { status: 500 });
   }
 }
