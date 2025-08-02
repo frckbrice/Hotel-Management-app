@@ -1,10 +1,28 @@
-import type { DefaultSession } from 'next-auth';
+import NextAuth from "next-auth";
 
-//* default session type config file
-declare module 'next-auth' {
+declare module "next-auth" {
+  interface User {
+    id: string;
+    email: string;
+    name: string;
+    image?: string;
+    isAdmin?: boolean;
+  }
+
   interface Session {
-    user: DefaultSession['user'] & {
+    user: {
       id: string;
+      email: string;
+      name: string;
+      image?: string;
+      isAdmin?: boolean;
     };
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    isAdmin?: boolean;
   }
 }

@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # Development service
+  app-dev:
+    build:
+      context: .
+      target: deps
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: yarn dev
+    profiles:
+      - dev
+
+  # Production service
+  app-prod:
+    build:
+      context: .
+      target: runner
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    profiles:
+      - prod
+
+  # Test service
+  app-test:
+    build:
+      context: .
+      target: deps
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=test
+    command: yarn test
+    profiles:
+      - test
+
+  # E2E test service
+  app-e2e:
+    build:
+      context: .
+      target: deps
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=test
+    command: yarn test:e2e
+    profiles:
+      - e2e
