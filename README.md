@@ -204,6 +204,16 @@ yarn test:performance:monitor # Performance monitoring
 - **Dark/Light Theme** with smooth transitions
 - **Security-first Design** with proper input validation
 
+## 🔒 Security Features
+
+
+- **Input Validation** and sanitization
+- **CSRF Protection** on all forms
+- **Environment Variables** for sensitive data
+- **HTTPS Enforcement** in production
+- **Rate Limiting** on API endpoints
+
+
 ## 📈 Business Impact
 
 - **Scalable Architecture** supporting high traffic
@@ -228,8 +238,6 @@ yarn test:performance:monitor # Performance monitoring
 - **GitHub**: [@frckbrice](https://github.com/frckbrice)
 - **LinkedIn**: [avom brice](https://www.linkedin.com/in/avom-brice/)
 - **Portfolio**: [maebrieporfolio](https://maebrieporfolio.vercel.app)
-
----
 
 **Last Updated**: July 2025
 **Status**: Production Ready with Enterprise Security
