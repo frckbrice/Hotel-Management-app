@@ -1,5 +1,10 @@
 import React from 'react';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
 type CardProps = React.ComponentProps<typeof Card>;
@@ -21,14 +26,12 @@ const CustomCard: React.FC<CustomCardProps> = ({
   return (
     <Card className={cn('w-[380px] shadow-xl', className)} {...props}>
       <CardHeader>
-        <div className="flex flex-col gap-2">
-          {cardHeader}
-        </div>
+        <div className='flex flex-col gap-2'>{cardHeader}</div>
       </CardHeader>
       <CardContent
-        className="grid
+        className='grid
         gap-4
-      "
+      '
       >
         {cardContent}
       </CardContent>
