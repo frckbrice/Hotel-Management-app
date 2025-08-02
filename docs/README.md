@@ -15,7 +15,7 @@ Contains all performance-related files and reports:
 
 ### 🔒 Security
 
-Contains security-related files and documentation:
+Contains security-related files and documentation\_:
 
 - `SECURITY.md` - Comprehensive security guidelines and best practices
 - `check-security-headers.js` - Script to verify security headers
