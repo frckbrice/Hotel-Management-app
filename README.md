@@ -1,10 +1,10 @@
-# 🏨 HotelMT - Full-Stack Hotel Management Platform
+#  HotelMT - Full-Stack Hotel Management Platform
 
 A full-stack, production-ready hotel booking platform built with cutting-edge technologies and modern development practices. This application demonstrates advanced web development skills including real-time data management, secure payment processing, and responsive design with enterprise-grade security.
 
 ![HotelMT Dashboard](public/hotelmgt/hmgt_3.png)
 
-## 🎯 Key Achievements
+##  Key Achievements
 
 - **Full-Stack Development** with Next.js 15, TypeScript, and modern React patterns
 - **Enterprise Testing Strategy** with Vitest (unit) and Playwright (E2E) - 26/26 tests passing
@@ -14,7 +14,7 @@ A full-stack, production-ready hotel booking platform built with cutting-edge te
 - **Enterprise Security** with comprehensive vulnerability protection and security best practices
 - **Performance Monitoring** with custom admin scripts for security headers and performance metrics
 
-## 🚀 Technical Excellence
+##  Technical Excellence
 
 ### Core Technologies
 
@@ -36,7 +36,7 @@ A full-stack, production-ready hotel booking platform built with cutting-edge te
 - **Interactive Maps** and email integration
 - **Accessibility Features** with WCAG 2.1 compliance
 
-## 🔒 Security Excellence
+##  Security Excellence
 
 ### Security Score: 8.7/10 ✅
 
@@ -59,7 +59,7 @@ A full-stack, production-ready hotel booking platform built with cutting-edge te
 - **Security Headers**: CSP, X-Frame-Options, XSS Protection
 - **OWASP Top 10** protection implemented
 
-## 🏗 Architecture Highlights
+##  Architecture Highlights
 
 ```
 Hotel-Management-app/
@@ -94,7 +94,7 @@ Hotel-Management-app/
 └── test/                      # Test files (unit, integration, E2E)
 ```
 
-## 🧪 Testing Strategy
+##  Testing Strategy
 
 ### Unit Testing (Vitest)
 
@@ -142,7 +142,7 @@ docker-compose --profile e2e up
 - Performance monitoring
 - Security scanning in CI/CD
 
-## 🚀 Quick Start
+##  Quick Start
 
 ```bash
 # Clone and setup
@@ -171,7 +171,7 @@ yarn test:headers  # Security headers validation
 yarn test:performance:monitor # Performance monitoring
 ```
 
-## 📊 Performance Metrics
+##  Performance Metrics
 
 - **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
 - **Bundle Size**: Optimized with code splitting and tree shaking
@@ -196,7 +196,7 @@ yarn test:performance:monitor # Performance monitoring
 - **Security Validation**: Environment variable validation
 - **Deployment**: Automatic Vercel deployment on main branch
 
-## 🎨 Design System
+##  Design System
 
 - **Modern UI/UX** with Tailwind CSS
 - **Responsive Design** for all devices
@@ -204,7 +204,7 @@ yarn test:performance:monitor # Performance monitoring
 - **Dark/Light Theme** with smooth transitions
 - **Security-first Design** with proper input validation
 
-## 🔒 Security Features
+##  Security Features
 
 - **Input Validation** and sanitization
 - **CSRF Protection** on all forms
@@ -212,7 +212,7 @@ yarn test:performance:monitor # Performance monitoring
 - **HTTPS Enforcement** in production
 - **Rate Limiting** on API endpoints
 
-## 📈 Business Impact
+##  Business Impact
 
 - **Scalable Architecture** supporting high traffic
 - **Real-time Updates** for booking management
@@ -221,7 +221,7 @@ yarn test:performance:monitor # Performance monitoring
 - **SEO Optimized** for better discoverability
 - **Security Compliant** for enterprise deployment
 
-## 🛡️ Security Compliance
+##  Security Compliance
 
 - **OWASP Top 10** protection implemented
 - **GDPR Compliance** with data protection measures
@@ -229,7 +229,7 @@ yarn test:performance:monitor # Performance monitoring
 - **WCAG 2.1 AA** accessibility standards
 - **Enterprise Security** best practices
 
-## 👨‍💻 Developer Profile
+##  Developer Profile
 
 **Avom Brice** - Full Stack Developer
 
