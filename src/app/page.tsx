@@ -1,4 +1,5 @@
 import FeaturedRoom from "@/components/pages/home/FeaturedRoom/FeaturedRoom";
+import FeaturedRoomSkeleton from "@/components/pages/home/FeaturedRoom/FeaturedRoomSkeleton";
 import Gallery from "@/components/pages/home/Gallary/Gallary";
 import HeroSection from "@/components/pages/home/HeroSection/HeroSection";
 import NewsLetter from "@/components/pages/home/NewsLetter/NewsLetter";
@@ -8,12 +9,16 @@ import { getFeaturedRoom } from "@/libs/apis";
 
 const Home = async () => {
   let featuredRoom = null;
+  let isLoadingFeaturedRoom = false;
 
   try {
+    isLoadingFeaturedRoom = true;
     featuredRoom = await getFeaturedRoom();
   } catch (error) {
     console.error("Error fetching featured room:", error);
     // Continue without featured room if there's an error
+  } finally {
+    isLoadingFeaturedRoom = false;
   }
 
   return (
@@ -25,7 +30,11 @@ const Home = async () => {
       <div className="space-y-8 sm:space-y-12 lg:space-y-14 xl:space-y-16">
         <HeroSection />
         <PageSearch />
-        {featuredRoom && <FeaturedRoom featuredRoom={featuredRoom} />}
+        {isLoadingFeaturedRoom ? (
+          <FeaturedRoomSkeleton />
+        ) : featuredRoom ? (
+          <FeaturedRoom featuredRoom={featuredRoom} />
+        ) : null}
         <Gallery />
         <Testimonial />
         <NewsLetter />

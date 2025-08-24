@@ -3,6 +3,7 @@
 import { getUserBookings } from "@/libs/apis";
 import useSWR from "swr";
 import LoadingSpinner from "@/app/loading";
+import UserDetailsSkeleton from "./UserDetailsSkeleton";
 import axios from "axios";
 import { User } from "@/types/user";
 import { FaSignOutAlt } from "react-icons/fa";
@@ -153,7 +154,7 @@ const UserDetails = ({ userId }: Props) => {
   if (typeof userBookings === "undefined" && !isLoading)
     throw new Error("Cannot fetch data");
 
-  if (isLoading || loadingUserData) return <LoadingSpinner />;
+  if (isLoading || loadingUserData) return <UserDetailsSkeleton />;
 
   return (
     <div className="min-h-screen p-10">
