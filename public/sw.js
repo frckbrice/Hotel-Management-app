@@ -23,8 +23,8 @@ if (!self.define) {
     if (s[c]) return;
     let r = {};
     const t = (e) => a(e, c),
-      o = { module: { uri: c }, exports: r, require: t };
-    s[c] = Promise.all(n.map((e) => o[e] || t(e))).then((e) => (i(...e), r));
+      f = { module: { uri: c }, exports: r, require: t };
+    s[c] = Promise.all(n.map((e) => f[e] || t(e))).then((e) => (i(...e), r));
   };
 }
 define(["./workbox-f1770938"], function (e) {
@@ -35,11 +35,11 @@ define(["./workbox-f1770938"], function (e) {
     e.precacheAndRoute(
       [
         {
-          url: "/_next/static/HrxYEUjmT8fq5j09hEtQW/_buildManifest.js",
-          revision: "6163b8ecfa12941f31dc405b7b6ab9d5",
+          url: "/_next/static/ICVvcDYK5kZh6NSmdU6hE/_buildManifest.js",
+          revision: "81b7fa8e6c76e406e83d270d12fe9030",
         },
         {
-          url: "/_next/static/HrxYEUjmT8fq5j09hEtQW/_ssgManifest.js",
+          url: "/_next/static/ICVvcDYK5kZh6NSmdU6hE/_ssgManifest.js",
           revision: "b6652df95db52feb4daf4eca35380933",
         },
         {
@@ -61,6 +61,10 @@ define(["./workbox-f1770938"], function (e) {
         {
           url: "/_next/static/chunks/app/api/contact/route-b4bdd04b1cc30e5e.js",
           revision: "b4bdd04b1cc30e5e",
+        },
+        {
+          url: "/_next/static/chunks/app/api/newsletter/route-ff4dece0cd59d087.js",
+          revision: "ff4dece0cd59d087",
         },
         {
           url: "/_next/static/chunks/app/api/performance-metrics/route-404572a4b8660d6a.js",
@@ -91,14 +95,6 @@ define(["./workbox-f1770938"], function (e) {
           revision: "53a99d0c46dc0dec",
         },
         {
-          url: "/_next/static/chunks/app/api/test-env/route-6c854b1163704a91.js",
-          revision: "6c854b1163704a91",
-        },
-        {
-          url: "/_next/static/chunks/app/api/test-sanity/route-246e55a09d0407d8.js",
-          revision: "246e55a09d0407d8",
-        },
-        {
           url: "/_next/static/chunks/app/api/userbooking/route-367f34966ea9f0cf.js",
           revision: "367f34966ea9f0cf",
         },
@@ -111,36 +107,36 @@ define(["./workbox-f1770938"], function (e) {
           revision: "d588aa5b9192a3e6",
         },
         {
-          url: "/_next/static/chunks/app/auth/page-d24a815f2fe546f3.js",
-          revision: "d24a815f2fe546f3",
+          url: "/_next/static/chunks/app/auth/page-ea1a14a849cb6d7b.js",
+          revision: "ea1a14a849cb6d7b",
         },
         {
-          url: "/_next/static/chunks/app/contact/page-4000c452bfc06438.js",
-          revision: "4000c452bfc06438",
-        },
-        {
-          url: "/_next/static/chunks/app/debug/page-4664a7461d92ed1d.js",
-          revision: "4664a7461d92ed1d",
+          url: "/_next/static/chunks/app/contact/page-e7929f4ebf436c94.js",
+          revision: "e7929f4ebf436c94",
         },
         {
           url: "/_next/static/chunks/app/error-8a4519094942401b.js",
           revision: "8a4519094942401b",
         },
         {
+          url: "/_next/static/chunks/app/gallery/loading-1d448fe4ccb66b10.js",
+          revision: "1d448fe4ccb66b10",
+        },
+        {
           url: "/_next/static/chunks/app/gallery/page-6c721e7619f048f3.js",
           revision: "6c721e7619f048f3",
         },
         {
-          url: "/_next/static/chunks/app/layout-752e6bb91064afaa.js",
-          revision: "752e6bb91064afaa",
+          url: "/_next/static/chunks/app/layout-25b4c46461d9c567.js",
+          revision: "25b4c46461d9c567",
         },
         {
           url: "/_next/static/chunks/app/loading-9ad645c9696a1f16.js",
           revision: "9ad645c9696a1f16",
         },
         {
-          url: "/_next/static/chunks/app/page-538a4aec92c1d726.js",
-          revision: "538a4aec92c1d726",
+          url: "/_next/static/chunks/app/page-c2fc65c16afc25f5.js",
+          revision: "c2fc65c16afc25f5",
         },
         {
           url: "/_next/static/chunks/app/robots.txt/route-306b452023755515.js",
@@ -151,20 +147,20 @@ define(["./workbox-f1770938"], function (e) {
           revision: "aeff396fda53e4e8",
         },
         {
-          url: "/_next/static/chunks/app/rooms/%5Bslug%5D/page-1688eb75db920d76.js",
-          revision: "1688eb75db920d76",
+          url: "/_next/static/chunks/app/rooms/%5Bslug%5D/page-6d48c0e041585ec1.js",
+          revision: "6d48c0e041585ec1",
         },
         {
-          url: "/_next/static/chunks/app/rooms/page-8a443665da022dee.js",
-          revision: "8a443665da022dee",
+          url: "/_next/static/chunks/app/rooms/page-16751f701a12c5c6.js",
+          revision: "16751f701a12c5c6",
         },
         {
           url: "/_next/static/chunks/app/sitemap.xml/route-0fb4e0f84b59c29b.js",
           revision: "0fb4e0f84b59c29b",
         },
         {
-          url: "/_next/static/chunks/app/users/%5Bid%5D/page-e3948af677d17308.js",
-          revision: "e3948af677d17308",
+          url: "/_next/static/chunks/app/users/%5Bid%5D/page-cff6a0a4e442f74a.js",
+          revision: "cff6a0a4e442f74a",
         },
         {
           url: "/_next/static/chunks/app/~offline/page-9a46ad6ccb722e34.js",
@@ -195,12 +191,12 @@ define(["./workbox-f1770938"], function (e) {
           revision: "c5752a41f1677603",
         },
         {
-          url: "/_next/static/css/11fe03c09fb53f1c.css",
-          revision: "11fe03c09fb53f1c",
-        },
-        {
           url: "/_next/static/css/589054f2b5071809.css",
           revision: "589054f2b5071809",
+        },
+        {
+          url: "/_next/static/css/c5fe2068cb5aeedd.css",
+          revision: "c5fe2068cb5aeedd",
         },
         {
           url: "/_next/static/media/26a46d62cd723877-s.woff2",
@@ -401,7 +397,7 @@ define(["./workbox-f1770938"], function (e) {
         },
         { url: "/manifest.json", revision: "2672bf502a4aece89f34b0d956e5e789" },
         { url: "/og-image.jpg", revision: "1afa6f745b2eb84e3a4274b786c51bb4" },
-        { url: "/~offline", revision: "HrxYEUjmT8fq5j09hEtQW" },
+        { url: "/~offline", revision: "ICVvcDYK5kZh6NSmdU6hE" },
       ],
       { ignoreURLParametersMatching: [/^utm_/, /^fbclid$/] },
     ),

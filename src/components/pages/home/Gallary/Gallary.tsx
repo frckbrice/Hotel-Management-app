@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import useSWR from "swr";
 import LazyImage from "@/components/optimization/LazyImage";
+import GallerySkeleton from "./GallerySkeleton";
 
 interface Room {
   coverImage: { url: string };
@@ -66,26 +67,17 @@ const Gallery = () => {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12 lg:mb-16">
-          {isLoading && (
-            <div className="col-span-full text-center text-lg py-10">
-              Loading rooms...
-            </div>
-          )}
-          {error && (
-            <div className="col-span-full text-center text-red-500 py-10">
-              Failed to load rooms. Please try again later.
-            </div>
-          )}
-          {!isLoading && !error && (!rooms || rooms.length === 0) && (
-            <div className="col-span-full text-center text-gray-500 py-10">
-              No rooms found.
-            </div>
-          )}
-          {!isLoading &&
-            !error &&
-            rooms &&
-            rooms.map((room, index) => (
+        {isLoading ? (
+          <GallerySkeleton />
+        ) : error ? (
+          <div className="text-center text-red-500 py-10">
+            Failed to load rooms. Please try again later.
+          </div>
+        ) : !rooms || rooms.length === 0 ? (
+          <div className="text-center text-gray-500 py-10">No rooms found.</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12 lg:mb-16">
+            {rooms.map((room, index) => (
               <div
                 key={room.slug.current}
                 className="group relative h-full"
@@ -101,7 +93,6 @@ const Gallery = () => {
                       alt={room.name}
                       width={400}
                       height={500}
-                      className="w-full h-full transition-all duration-1000 group-hover:scale-110 group-hover:brightness-110"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       priority={index < 2}
                       quality={80}
@@ -172,7 +163,8 @@ const Gallery = () => {
                 </div>
               </div>
             ))}
-        </div>
+          </div>
+        )}
 
         {/* Call to Action */}
         <div className="text-center">

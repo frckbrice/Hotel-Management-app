@@ -11,6 +11,8 @@ import {
   FaPaperPlane,
   FaCheckCircle,
   FaMap,
+  FaMapMarkerAlt,
+  FaPersonBooth,
 } from "react-icons/fa";
 import { BiMap } from "react-icons/bi";
 import { BsTelephoneOutbound } from "react-icons/bs";
@@ -111,6 +113,7 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const handleInputChange = (
     e: React.ChangeEvent<
@@ -121,10 +124,54 @@ const ContactPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const validateForm = () => {
+    const errors: Record<string, string> = {};
+    let isValid = true;
+
+    if (!formData.firstName.trim()) {
+      errors.firstName = "First name is required";
+      isValid = false;
+    }
+    if (!formData.lastName.trim()) {
+      errors.lastName = "Last name is required";
+      isValid = false;
+    }
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+      isValid = false;
+    } else {
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        errors.email = "Please enter a valid email address";
+        isValid = false;
+      }
+    }
+    if (!formData.subject) {
+      errors.subject = "Please select a subject";
+      isValid = false;
+    }
+    if (!formData.message.trim()) {
+      errors.message = "Message is required";
+      isValid = false;
+    }
+
+    setFieldErrors(errors);
+    setError("");
+
+    return isValid;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setError("");
+
+    // Client-side validation
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("/api/contact", {
@@ -139,6 +186,7 @@ const ContactPage = () => {
 
       if (response.ok) {
         setIsSubmitted(true);
+        setFieldErrors({});
         // Reset form after 3 seconds
         setTimeout(() => {
           setIsSubmitted(false);
@@ -162,7 +210,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen">
       {/* Enhanced Hero Section */}
       <div className="relative h-60 sm:h-72 md:h-80 bg-gradient-to-r from-green-600 via-green-700 to-green-800 overflow-hidden">
         {/* Animated Background Elements */}
@@ -396,7 +444,7 @@ const ContactPage = () => {
                   </div>
 
                   {error && (
-                    <div className="text-center text-red-500 dark:text-red-400 text-sm sm:text-base">
+                    <div className="text-center text-red-500 dark:text-red-400 text-sm sm:text-base bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
                       {error}
                     </div>
                   )}
@@ -405,18 +453,27 @@ const ContactPage = () => {
                     type="submit"
                     disabled={isSubmitting}
                     className="group/btn w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 sm:py-5 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-500 transform hover:scale-[1.02] shadow-xl hover:shadow-2xl disabled:cursor-not-allowed disabled:transform-none overflow-hidden relative text-sm sm:text-base"
+                    aria-label={
+                      isSubmitting ? "Sending message..." : "Send message"
+                    }
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"></div>
                     <span className="relative z-10 flex items-center justify-center space-x-2 sm:space-x-3">
                       {isSubmitting ? (
                         <>
-                          <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          <div
+                            className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
+                            aria-hidden="true"
+                          ></div>
                           <span>Sending...</span>
                         </>
                       ) : (
                         <>
                           <span>Send Message</span>
-                          <FaPaperPlane className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
+                          <FaPaperPlane
+                            className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300"
+                            aria-hidden="true"
+                          />
                         </>
                       )}
                     </span>
@@ -447,6 +504,11 @@ const ContactPage = () => {
                     icon: BsTelephoneOutbound,
                     title: "Phone",
                     content: ["674-852-304"],
+                  },
+                  {
+                    icon: FaEnvelope,
+                    title: "Email",
+                    content: ["bricefrkc@gmail.com"],
                   },
                 ].map((item, index) => (
                   <div
@@ -484,7 +546,7 @@ const ContactPage = () => {
                           item.content.map((line, i) => (
                             <p
                               key={i}
-                              className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base break-words"
+                              className="text-gray-400 dark:text-gray-300 leading-relaxed text-sm sm:text-base break-words"
                             >
                               {line}
                             </p>
@@ -499,29 +561,29 @@ const ContactPage = () => {
 
             {/* Enhanced Social Media */}
             <div className="bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/20 dark:border-gray-700/20 hover:shadow-3xl transition-all duration-500">
-              <h3 className="text-2xl font-bold mb-8 text-gray-800 dark:text-white font-heading text-center">
+              <h3 className="text-[20px] font-bold mb-8 text-gray-800 dark:text-white font-heading text-center">
                 Follow Our Journey
               </h3>
               <div className="flex justify-center space-x-6">
                 {[
                   {
                     icon: FaFacebook,
-                    color: "from-blue-600 to-blue-700",
+                    color: "from-blue-500 to-blue-600",
                     hoverColor: "hover:from-blue-700 hover:to-blue-800",
                   },
                   {
                     icon: FaTwitter,
-                    color: "from-sky-500 to-sky-600",
+                    color: "from-sky-400 to-sky-500",
                     hoverColor: "hover:from-sky-600 hover:to-sky-700",
                   },
                   {
                     icon: FaInstagram,
-                    color: "from-pink-600 to-pink-700",
+                    color: "from-pink-500 to-pink-600",
                     hoverColor: "hover:from-pink-700 hover:to-pink-800",
                   },
                   {
                     icon: FaLinkedin,
-                    color: "from-blue-700 to-blue-800",
+                    color: "from-blue-600 to-blue-700",
                     hoverColor: "hover:from-blue-800 hover:to-blue-900",
                   },
                 ].map((social, index) => (
@@ -539,31 +601,31 @@ const ContactPage = () => {
             </div>
 
             {/* Enhanced Emergency Contact */}
-            <div className="relative bg-gradient-to-br from-red-300 via-red-400 to-red-400 rounded-3xl shadow-2xl p-8 text-white overflow-hidden group hover:shadow-3xl transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent"></div>
-              <div className="absolute top-4 right-4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
-              <div className="absolute bottom-4 left-4 w-16 h-16 bg-white/5 rounded-full blur-lg"></div>
+            <div className="relative bg-gradient-to-br  rounded-3xl shadow-2xl p-8 text-white overflow-hidden group hover:shadow-3xl transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-r  dark:from-red-600/20 to-transparent"></div>
+              <div className="absolute top-4 right-4 w-24 h-24 dark:bg-white/10 rounded-full blur-xl"></div>
+              <div className="absolute bottom-4 left-4 w-16 h-16 dark:bg-white/5 rounded-full blur-lg"></div>
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold font-heading">
+                  <h3 className="text-[20px]  font-bold font-heading">
                     Emergency Contact
                   </h3>
-                  <div className="w-4 h-4 bg-red-200 rounded-full animate-pulse"></div>
+                  <div className="w-4 h-4 bg-red-300 rounded-full animate-pulse"></div>
                 </div>
-                <p className="mb-6 opacity-90 text-lg">
+                <p className="mb-6 opacity-90 text-lg text-gray-400 dark:text-gray-300">
                   For urgent matters outside business hours
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3 sm:space-x-4 p-3 bg-white/10 rounded-xl backdrop-blur-sm">
-                    <FaPhone className="text-red-200 text-lg sm:text-xl flex-shrink-0" />
-                    <span className="font-semibold text-sm sm:text-base break-words">
+                    <FaPhone className="hover:text-green-600 dark:hover:text-green-400 transition-colors text-green-600 dark:text-green-400 text-lg sm:text-xl flex-shrink-0" />
+                    <span className="font-semibold text-sm sm:text-base break-words text-gray-400 dark:text-gray-300">
                       Emergency: +237 999 888 777
                     </span>
                   </div>
                   <div className="flex items-center space-x-3 sm:space-x-4 p-3 bg-white/10 rounded-xl backdrop-blur-sm">
-                    <FaEnvelope className="text-red-200 text-lg sm:text-xl flex-shrink-0" />
-                    <span className="font-semibold text-sm sm:text-base break-words">
+                    <FaEnvelope className="group-hover:text-green-600 dark:hover:text-green-400 transition-colors text-green-600 dark:text-green-400 text-lg sm:text-xl flex-shrink-0" />
+                    <span className="font-semibold text-sm sm:text-base break-words text-gray-400 dark:text-gray-300">
                       emergency@luxuryhotel.com
                     </span>
                   </div>

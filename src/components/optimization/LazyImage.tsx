@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ImageIcon, Hotel, Loader2, AlertTriangle } from "lucide-react";
 
@@ -55,8 +55,9 @@ const LazyImage: React.FC<LazyImageProps> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(priority || false);
   const [currentSrc, setCurrentSrc] = useState(src);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Intersection Observer for lazy loading
   useEffect(() => {
@@ -64,6 +65,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
       setIsVisible(true);
       return;
     }
+
+    if (!containerRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -75,11 +78,10 @@ const LazyImage: React.FC<LazyImageProps> = ({
       { rootMargin: "50px" },
     );
 
-    const element = document.getElementById(`lazy-image-${src}`);
-    if (element) observer.observe(element);
+    observer.observe(containerRef.current);
 
     return () => observer.disconnect();
-  }, [src, priority]);
+  }, [priority]);
 
   // Handle image error with fallback
   const handleError = () => {
@@ -139,6 +141,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
 
   return (
     <div
+      ref={containerRef}
       id={imageId}
       className={containerClasses}
       style={{ width: width || "100%", height: height || "auto" }}
@@ -182,31 +185,60 @@ const LazyImage: React.FC<LazyImageProps> = ({
       {/* Actual Image */}
       {isVisible && !hasError && (
         <>
-          <Image
-            src={currentSrc}
-            alt={alt}
-            fill
-            priority={priority}
-            quality={quality}
-            sizes={sizes}
-            placeholder={placeholder}
-            blurDataURL={blurDataURL}
-            loading={priority ? undefined : loading}
-            onLoad={handleLoad}
-            onError={handleError}
-            className={`
-                            transition-all duration-500 ease-out
-                            ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"}
-                            ${objectFit === "cover" ? "object-cover" : ""}
-                            ${objectFit === "contain" ? "object-contain" : ""}
-                            ${objectFit === "fill" ? "object-fill" : ""}
-                            ${objectFit === "none" ? "object-none" : ""}
-                            ${objectFit === "scale-down" ? "object-scale-down" : ""}
-                        `}
-            style={{
-              objectPosition: "center",
-            }}
-          />
+          {width && height ? (
+            <Image
+              src={currentSrc}
+              alt={alt}
+              width={width}
+              height={height}
+              priority={priority}
+              quality={quality}
+              sizes={sizes}
+              placeholder={placeholder}
+              blurDataURL={blurDataURL}
+              loading={priority ? undefined : loading}
+              onLoad={handleLoad}
+              onError={handleError}
+              className={`
+                transition-all duration-500 ease-out w-full h-full
+                ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"}
+                ${objectFit === "cover" ? "object-cover" : ""}
+                ${objectFit === "contain" ? "object-contain" : ""}
+                ${objectFit === "fill" ? "object-fill" : ""}
+                ${objectFit === "none" ? "object-none" : ""}
+                ${objectFit === "scale-down" ? "object-scale-down" : ""}
+              `}
+              style={{
+                objectPosition: "center",
+              }}
+            />
+          ) : (
+            <Image
+              src={currentSrc}
+              alt={alt}
+              fill
+              priority={priority}
+              quality={quality}
+              sizes={sizes}
+              placeholder={placeholder}
+              blurDataURL={blurDataURL}
+              loading={priority ? undefined : loading}
+              onLoad={handleLoad}
+              onError={handleError}
+              className={`
+                transition-all duration-500 ease-out
+                ${isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"}
+                ${objectFit === "cover" ? "object-cover" : ""}
+                ${objectFit === "contain" ? "object-contain" : ""}
+                ${objectFit === "fill" ? "object-fill" : ""}
+                ${objectFit === "none" ? "object-none" : ""}
+                ${objectFit === "scale-down" ? "object-scale-down" : ""}
+              `}
+              style={{
+                objectPosition: "center",
+              }}
+            />
+          )}
 
           {/* Overlay Effect */}
           {overlay && isLoaded && (
