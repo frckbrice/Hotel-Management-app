@@ -147,8 +147,8 @@ const Header = () => {
         onClick={closeMobileMenu}
         className="px-4 py-2 bg-green-600 text-white rounded-full hover:bg-green-700"
       >
-        {/* <FaUserCircle className="inline mr-2" /> */}
-        <UserAvatar size={24} className="inline mr-2 align-middle" />
+        <FaUserCircle className="inline mr-2" />
+        {/* <UserAvatar size={24} className="inline mr-2 align-middle" /> */}
         Sign In
       </Link>
     );
