@@ -21,6 +21,17 @@ vi.mock("next/navigation", () => ({
     refresh: vi.fn(),
     prefetch: vi.fn(),
   }),
+  useSearchParams: () => ({
+    get: vi.fn((param: string) => {
+      if (param === "callbackUrl") return "/";
+      return null;
+    }),
+    has: vi.fn(),
+    forEach: vi.fn(),
+    entries: vi.fn(),
+    keys: vi.fn(),
+    values: vi.fn(),
+  }),
 }));
 
 // Mock theme context
@@ -50,7 +61,7 @@ describe("Authentication Components", () => {
       expect(screen.getByText("Create an Account")).toBeInTheDocument();
       expect(screen.getByPlaceholderText(/your name/i)).toBeInTheDocument();
       expect(
-        screen.getByPlaceholderText(/name@compagny\.com/i),
+        screen.getByPlaceholderText(/name@company\.com/i),
       ).toBeInTheDocument();
       expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument();
       expect(
@@ -72,7 +83,7 @@ describe("Authentication Components", () => {
       const signInElements = screen.getAllByText("Sign In");
       expect(signInElements.length).toBeGreaterThan(0);
       expect(
-        screen.getByPlaceholderText(/name@compagny\.com/i),
+        screen.getByPlaceholderText(/name@company\.com/i),
       ).toBeInTheDocument();
       expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument();
       expect(
@@ -104,7 +115,7 @@ describe("Authentication Components", () => {
       render(<AuthForms />);
 
       const nameInput = screen.getByPlaceholderText(/your name/i);
-      const emailInput = screen.getByPlaceholderText(/name@compagny\.com/i);
+      const emailInput = screen.getByPlaceholderText(/name@company\.com/i);
       const passwordInput = screen.getByPlaceholderText(/password/i);
 
       fireEvent.change(nameInput, { target: { value: "John Doe" } });
@@ -132,8 +143,8 @@ describe("Authentication Components", () => {
 
       render(<AuthForms />);
 
-      // Should redirect to home page
-      expect(screen.getByText("Create an Account")).toBeInTheDocument();
+      // Should show welcome message for authenticated user
+      expect(screen.getByText("Welcome back, Test User!")).toBeInTheDocument();
     });
   });
 });

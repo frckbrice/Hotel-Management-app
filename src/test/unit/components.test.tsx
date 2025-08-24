@@ -19,23 +19,15 @@ vi.mock("@/app/(web)/themeProvider/ThemeProvider", () => ({
   }),
 }));
 
-// Mock Next.js router
-vi.mock("next/router", () => ({
+// Mock Next.js navigation (App Router)
+vi.mock("next/navigation", () => ({
   useRouter: () => ({
     push: vi.fn(),
     replace: vi.fn(),
-    prefetch: vi.fn(),
     back: vi.fn(),
     forward: vi.fn(),
-    reload: vi.fn(),
-    pathname: "/",
-    query: {},
-    asPath: "/",
-    events: {
-      on: vi.fn(),
-      off: vi.fn(),
-      emit: vi.fn(),
-    },
+    refresh: vi.fn(),
+    prefetch: vi.fn(),
   }),
 }));
 
