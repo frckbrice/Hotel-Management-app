@@ -34,7 +34,6 @@ const FeaturedRoom = ({ featuredRoom }: Props) => {
                       alt={featuredRoom?.name}
                       width={800}
                       height={600}
-                      className="object-cover transition-transform duration-700 group-hover:scale-105 w-full h-full"
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority={true}
                       placeholderText={featuredRoom?.name}
@@ -60,7 +59,6 @@ const FeaturedRoom = ({ featuredRoom }: Props) => {
                             alt={`${featuredRoom.name} - Image ${index + 1}`}
                             width={400}
                             height={300}
-                            className="object-cover transition-transform duration-500 group-hover:scale-110 w-full h-full"
                             sizes="(max-width: 768px) 50vw, 25vw"
                             placeholderText={`${featuredRoom.name} ${index + 1}`}
                             showPlaceholderText={true}

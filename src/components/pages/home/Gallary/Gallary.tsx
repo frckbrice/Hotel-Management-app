@@ -101,7 +101,6 @@ const Gallery = () => {
                       alt={room.name}
                       width={400}
                       height={500}
-                      className="w-full h-full transition-all duration-1000 group-hover:scale-110 group-hover:brightness-110"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       priority={index < 2}
                       quality={80}

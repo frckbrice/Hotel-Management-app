@@ -23,7 +23,6 @@ const RoomCard: FC<Props> = ({ room }) => {
           alt={name}
           width={300}
           height={300}
-          className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
           priority={true}
           placeholderText={name}
           showPlaceholderText={true}

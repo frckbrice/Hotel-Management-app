@@ -216,12 +216,14 @@ const Rooms = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-8 ">
       {/* Header with Stats */}
       <div className="mb-8">
-        <h1 className="text-3xl text-center font-bold text-gray-900 dark:text-white mb-6">
-          Our Rooms
-        </h1>
+        <div className="flex justify-center items-center pt-16 pb-10">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-6 sm:mb-8 lg:mb-10 ">
+            Our Rooms
+          </h1>
+        </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">

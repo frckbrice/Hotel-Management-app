@@ -14,6 +14,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 },
+      );
+    }
+
     // Create transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -65,8 +74,30 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error("Email sending error:", error);
+
+    // Provide more specific error messages
+    if (error instanceof Error) {
+      if (error.message.includes("Invalid login")) {
+        return NextResponse.json(
+          {
+            error:
+              "Email service authentication failed. Please contact support.",
+          },
+          { status: 500 },
+        );
+      } else if (error.message.includes("ENOTFOUND")) {
+        return NextResponse.json(
+          {
+            error:
+              "Email service temporarily unavailable. Please try again later.",
+          },
+          { status: 500 },
+        );
+      }
+    }
+
     return NextResponse.json(
-      { error: "Failed to send email" },
+      { error: "Failed to send email. Please try again later." },
       { status: 500 },
     );
   }

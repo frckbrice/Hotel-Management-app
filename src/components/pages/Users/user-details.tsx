@@ -5,7 +5,8 @@ import useSWR from "swr";
 import LoadingSpinner from "@/app/loading";
 import axios from "axios";
 import { User } from "@/types/user";
-import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
+import UserAvatar from "@/components/global/Header/user-avatar";
 import { signOut, useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import { BsJournalBookmarkFill } from "react-icons/bs";
@@ -16,7 +17,7 @@ import Chart from "./Chart/Chart";
 import RatingModal from "@/components/pages/Users/Rating/RatingModal/RatingModal";
 import BackDrop from "@/components/global/Backdrop/BackDrop";
 import toast from "react-hot-toast";
-import LazyImage from "@/components/optimization/LazyImage";
+
 import router from "next/router";
 
 type Props = {
@@ -50,9 +51,17 @@ const UserDetails = ({ userId }: Props) => {
     console.log("\n\nuserData", data);
     return data;
   };
+
+  useEffect(() => {
+    if (!session || session.user.id !== userId) {
+      router.push("/");
+    }
+  }, [session, userId]);
   useEffect(() => {
     if (!user) {
-      router.push("/auth");
+      // Redirect to auth page with current page as callback URL
+      const currentUrl = window.location.pathname;
+      router.push(`/auth?callbackUrl=${encodeURIComponent(currentUrl)}`);
     }
   }, [user]);
 
@@ -147,44 +156,29 @@ const UserDetails = ({ userId }: Props) => {
   if (isLoading || loadingUserData) return <LoadingSpinner />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800 p-10">
+    <div className="min-h-screen p-10">
       <div className="container mx-auto px-2 md:px-4 py-10">
         <div className="grid grid-cols-12 gap-10">
           <div className="hidden md:block col-span-4 lg:col-span-3 sticky top-10 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 space-y-6">
             {/* Profile Image */}
             <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-green-300 dark:border-green-600 shadow-lg">
-              {userData?.image || user?.image ? (
-                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-green-300 dark:border-green-600 shadow-lg">
-                  <LazyImage
-                    src={userData?.image || user?.image || ""}
-                    alt={userData?.name || user?.name || "User image"}
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ) : (
-                <div
-                  className="w-32 h-32 rounded-full flex items-center justify-center"
-                  style={{
-                    background:
-                      "linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)))",
-                  }}
-                >
-                  <FaUserCircle className="text-white" size={84} />
-                </div>
-              )}
+              <UserAvatar
+                src={userData?.image || user?.image}
+                alt={userData?.name || user?.name || "User"}
+                size={128}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* About Section */}
-            {/* <div className='text-center flex flex-col items-center justify-center'>
-              <h2 className='text-2xl font-semibold text-gray-800 dark:text-white'>
+            <div className="text-center flex flex-col items-center justify-center">
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
                 About
               </h2>
-              <p className='text-sm text-gray-600 dark:text-gray-300 mt-2 text-justify'>
-                {userData?.about || user?.name || 'No description available'}
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-2 text-justify">
+                {userData?.about || user?.name || "No description available"}
               </p>
-            </div> */}
+            </div>
 
             {/* Username / Name */}
             <div className="text-center">
@@ -223,16 +217,12 @@ const UserDetails = ({ userId }: Props) => {
                 Hello, {user?.name}
               </h5>
             </div>
-            <div className="md:hidden w-14 h-14 rounded-l-full overflow-hidden ">
-              <LazyImage
-                src="/images/jean.jpg"
-                alt="User avatar"
-                width={56}
-                height={56}
-                className=" img scale-animation rounded-full"
-                placeholderText="User Avatar"
-                showPlaceholderText={true}
-                quality={80}
+            <div className="md:hidden w-14 h-14 rounded-l-full overflow-hidden">
+              <UserAvatar
+                src={userData?.image || user?.image}
+                alt={userData?.name || user?.name || "User"}
+                size={56}
+                className="img scale-animation rounded-full"
               />
             </div>
             <p className="block w-fit md:hidden text-sm py-2 text-gray-600 dark:text-gray-300 text-justify">

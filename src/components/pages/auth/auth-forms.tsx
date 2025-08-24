@@ -5,9 +5,8 @@ import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { signIn, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ZodError } from "zod";
-import { error } from "console";
 
 const defaultFormData = {
   email: "",
@@ -20,6 +19,12 @@ const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { data: session, status, update } = useSession(); //  add update
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
   const inputStyle =
     "border border-gray-300 dark:border-gray-600 sm:text-sm text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-lg block w-full p-2.5 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-200";
 
@@ -28,17 +33,26 @@ const Auth = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const { data: session } = useSession();
-  const router = useRouter();
-
+  // Debug log
   useEffect(() => {
-    if (session) router.push("/");
-  }, [router, session]);
+    if (process.env.NODE_ENV === "development") {
+      console.log("Auth form session status:", status);
+      console.log("Auth form session data:", session);
+    }
+  }, [session, status]);
+
+  // redirect after login if a callback is passed
+  useEffect(() => {
+    if (session && callbackUrl !== "/") {
+      router.push(callbackUrl);
+    }
+  }, [session, callbackUrl, router]);
 
   const githubLoginHandler = async () => {
     try {
       setIsLoading(true);
-      await signIn("github", { callbackUrl: "/" });
+      await signIn("github", { callbackUrl });
+      await update();
     } catch (error) {
       console.error("GitHub OAuth error:", error);
       toast.error("GitHub authentication failed");
@@ -50,7 +64,8 @@ const Auth = () => {
   const googleLoginHandler = async () => {
     try {
       setIsLoading(true);
-      await signIn("google", { callbackUrl: "/" });
+      await signIn("google", { callbackUrl });
+      await update();
     } catch (error) {
       console.error("Google OAuth error:", error);
       toast.error("Google authentication failed");
@@ -72,7 +87,16 @@ const Auth = () => {
         toast.error("Invalid credentials");
       } else {
         toast.success("Login successful!");
-        router.push("/");
+
+        // Force a session refresh and wait for it to complete
+        const updatedSession = await update();
+        console.log("Updated session before:", updatedSession);
+        // Only redirect after session is confirmed updated
+        if (updatedSession) {
+          console.log("Updated session after:", updatedSession);
+          router.push(callbackUrl);
+          router.refresh(); // Refresh the page to update all components
+        }
       }
     } catch (error: any) {
       console.error("Login error:", error);
@@ -87,16 +111,14 @@ const Auth = () => {
     try {
       setIsLoading(true);
       if (isSignUp) {
-        // Handle signup
         const res = await fetch("/api/sanity/signUp", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         });
 
-        // Check if response is JSON
         const contentType = res.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
+        if (!contentType?.includes("application/json")) {
           console.error("Non-JSON response:", await res.text());
           toast.error("Server error - please try again");
           return;
@@ -106,19 +128,17 @@ const Auth = () => {
         if (res.ok && data.success) {
           toast.success("Account created successfully! Please login.");
           setIsSignUp(false);
+          setFormData(defaultFormData);
         } else {
-          // Extract the message from the first error in the array
           const errorMessage =
             data.error instanceof ZodError
               ? data.error.issues[0].message
               : typeof data.error === "string"
                 ? data.error
                 : "Signup failed";
-          // console.error('Error in signUp:', errorMessage);
           toast.error(errorMessage);
         }
       } else {
-        // Handle login
         await credentialsLoginHandler();
       }
     } catch (error) {
@@ -126,17 +146,55 @@ const Auth = () => {
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
-      if (isSignUp) {
-        setFormData(defaultFormData);
-      }
     }
   };
+
+  // If already logged in
+  if (session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <section className="container mx-auto">
+          <div className="bg-white dark:bg-gray-800 p-6 space-y-4 md:space-y-6 sm:p-8 w-80 md:w-[70%] mx-auto rounded-2xl shadow-xl text-center">
+            <h1 className="text-xl font-bold md:text-2xl text-gray-800 dark:text-white mb-4">
+              Welcome back, {session.user?.name || session.user?.email}!
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              You are successfully authenticated.
+            </p>
+            <div className="space-y-3">
+              <button
+                onClick={() => router.push("/")}
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium text-sm px-5 py-2.5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Go to Home
+              </button>
+              {callbackUrl !== "/" && (
+                <button
+                  onClick={() => router.push(callbackUrl)}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium text-sm px-5 py-2.5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Continue to{" "}
+                  {callbackUrl === "/rooms"
+                    ? "Rooms"
+                    : callbackUrl === "/gallery"
+                      ? "Gallery"
+                      : "Requested Page"}
+                </button>
+              )}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // Default form
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center">
       <section className="container mx-auto">
         <div className="bg-white dark:bg-gray-800 p-6 space-y-4 md:space-y-6 sm:p-8 w-80 md:w-[70%] mx-auto rounded-2xl shadow-xl">
           <div className="flex mb-8 flex-col md:flex-row items-center justify-between">
-            <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl text-gray-800 dark:text-white">
+            <h1 className="text-xl font-bold md:text-2xl text-gray-800 dark:text-white">
               {isSignUp ? "Create an Account" : "Sign In"}
             </h1>
             <p className="text-gray-600 dark:text-gray-300">OR</p>
@@ -152,12 +210,11 @@ const Auth = () => {
               />
             </span>
           </div>
-          <form className=" space-y-4 md:space-y-6" onSubmit={submitData}>
+          <form className="space-y-4 md:space-y-6" onSubmit={submitData}>
             {isSignUp && (
               <input
                 type="text"
                 name="name"
-                id="name"
                 placeholder="your name"
                 required
                 className={inputStyle}
@@ -168,30 +225,26 @@ const Auth = () => {
             <input
               type="email"
               name="email"
-              id="email"
-              placeholder="name@compagny.com"
+              placeholder="name@company.com"
               required
               className={inputStyle}
-              // autoComplete="off"
               value={formData.email}
               onChange={handleInputChange}
             />
             <input
               type="password"
               name="password"
-              id="password"
               placeholder="password"
               required
               minLength={6}
               className={inputStyle}
-              // autoComplete="off"
               value={formData.password}
               onChange={handleInputChange}
             />
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white focus:outline-none font-medium text-sm px-5 py-2.5 text-center rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium text-sm px-5 py-2.5 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Loading..." : isSignUp ? "Sign Up" : "Sign In"}
             </button>

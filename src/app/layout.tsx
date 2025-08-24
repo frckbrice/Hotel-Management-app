@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/context/theme/ThemeProvider";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "@/components/ui/sonner";
 import AccessibilityProvider from "@/context/accessibility-provider";
 import AccessibilityButton from "@/components/global/Accessibility-button";
 import Header from "@/components/global/Header";
@@ -250,7 +250,7 @@ export default function RootLayout({
                     <Footer />
                     <AccessibilityButton />
                   </div>
-                  <Toaster position="bottom-right" reverseOrder={false} />
+                  <Toaster position="bottom-right" theme="system" richColors />
                 </SWRProvider>
               </ThemeProvider>
             </AccessibilityProvider>

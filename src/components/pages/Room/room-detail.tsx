@@ -68,7 +68,9 @@ const RoomDetails = ({ slug }: RoomDetailsProps) => {
 
     if (!session) {
       toast.error("Please sign in to book a room");
-      router.push("/auth");
+      // Redirect to auth page with current page as callback URL
+      const currentUrl = `/rooms/${slug}`;
+      router.push(`/auth?callbackUrl=${encodeURIComponent(currentUrl)}`);
       return;
     }
 
@@ -129,7 +131,9 @@ const RoomDetails = ({ slug }: RoomDetailsProps) => {
         error.response?.data === "Authentication  required"
       ) {
         toast.error("Please sign in to book a room");
-        router.push("/auth");
+        // Redirect to auth page with current page as callback URL
+        const currentUrl = `/rooms/${slug}`;
+        router.push(`/auth?callbackUrl=${encodeURIComponent(currentUrl)}`);
       } else {
         toast.error("An error occurred during payment setup");
       }
@@ -144,7 +148,7 @@ const RoomDetails = ({ slug }: RoomDetailsProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen">
       {/* Hero Image Gallery Section */}
       <div className="relative">
         <div className="w-full h-[60vh] md:h-[70vh] overflow-hidden">

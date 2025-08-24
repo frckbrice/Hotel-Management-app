@@ -75,14 +75,7 @@ const Footer = (props: Props) => {
 
   return (
     <footer className="relative bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 mt-20 overflow-hidden pb-8 sm:pb-0">
-      {/* Decorative Top Border */}
-      <div
-        className="h-1 w-full"
-        style={{
-          background:
-            "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))",
-        }}
-      />
+      {/* Removed decorative top border to fix dark mode black line issue */}
 
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -96,12 +89,7 @@ const Footer = (props: Props) => {
         <div className="text-center mb-16">
           <Link
             href="/"
-            className="inline-block font-black text-4xl md:text-5xl mb-4 hover:scale-105 transition-transform duration-300 mt-10"
-            // style={{
-            //   background: 'linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)))',
-            //   WebkitBackgroundClip: 'text',
-            //   WebkitTextFillColor: 'transparent'
-            // }}
+            className="inline-block font-black text-4xl md:text-5xl mb-4 hover:scale-105 transition-transform duration-300 mt-10 text-green-700 dark:text-green-400"
           >
             HotelMT
           </Link>
@@ -115,13 +103,7 @@ const Footer = (props: Props) => {
           {/* Contact Information */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-8">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center mr-3"
-                style={{
-                  background:
-                    "linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)))",
-                }}
-              >
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gradient-to-br from-green-500 to-green-600">
                 <BiPhone className="text-white text-lg" />
               </div>
               <h4 className="font-bold text-xl text-gray-800 dark:text-white">
@@ -169,7 +151,8 @@ const Footer = (props: Props) => {
                   <Link
                     href="https://maebrieporfolio.vercel.app/"
                     target="_blank"
-                    className="text-transparent bg-clip-text hover:underline inline-flex items-center group/link "
+                    rel="noopener noreferrer"
+                    className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 hover:underline inline-flex items-center group/link transition-colors duration-300"
                   >
                     Check my work
                     <BsArrowUpRight className="ml-1 w-3 h-3 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
@@ -242,13 +225,7 @@ const Footer = (props: Props) => {
                   placeholder="Enter your email"
                   className="flex-1 px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 text-sm"
                 />
-                <button
-                  className="px-6 py-3 rounded-r-xl text-white font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                  style={{
-                    background:
-                      "linear-gradient(45deg, hsl(var(--primary)), hsl(var(--accent)))",
-                  }}
-                >
+                <button className="px-6 py-3 rounded-r-xl text-white font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800">
                   <BsFillSendFill className="w-4 h-4" />
                 </button>
               </div>
@@ -309,16 +286,7 @@ const Footer = (props: Props) => {
         </div>
       </div>
 
-      {/* Decorative Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 opacity-50">
-        <div
-          className="h-full w-full"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent, hsl(var(--primary)), hsl(var(--accent)), transparent)",
-          }}
-        />
-      </div>
+      {/* Removed decorative bottom wave to fix dark mode styling issues */}
     </footer>
   );
 };
