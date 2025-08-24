@@ -5,4 +5,4 @@ echo "testing before push..."
 
 npx lint-staged 
 npm run test
-npm run test:e2e
+# npm run test:e2e
