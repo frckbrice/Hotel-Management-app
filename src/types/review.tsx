@@ -17,6 +17,6 @@ export type Review = {
     name: string;
   };
   userRating: number;
-  _createAt: Date;
+  _createdAt: Date;
   _id: string;
 };

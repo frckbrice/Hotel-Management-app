@@ -4,10 +4,14 @@ import { NextResponse } from "next/server";
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> },
-): Promise<Response | undefined> {
-  const { id: roomId } = await params;
-
+): Promise<Response> {
   try {
+    const { id: roomId } = await params;
+
+    if (!roomId) {
+      return new NextResponse("Room ID is required", { status: 400 });
+    }
+
     const roomReviews = await getRoomReviews(roomId);
 
     return NextResponse.json(roomReviews, {
@@ -15,7 +19,7 @@ export async function GET(
       statusText: "success",
     });
   } catch (error) {
-    console.log("error fetching review data, ", error);
-    return new NextResponse("error fetching review data!!", { status: 500 });
+    console.error("Error fetching review data:", error);
+    return new NextResponse("Error fetching review data", { status: 500 });
   }
 }
