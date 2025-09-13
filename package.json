@@ -44,7 +44,7 @@
     "@sanity/vision": "^4.1.1",
     "@stripe/stripe-js": "^7.6.1",
     "@types/nodemailer": "^6.4.17",
-    "axios": "^1.6.5",
+    "axios": "^1.12.0",
     "bcryptjs": "^3.0.2",
     "chart.js": "^4.5.0",
     "class-variance-authority": "^0.7.1",
